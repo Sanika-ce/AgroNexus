@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech News | Real-Time Agriculture Updates</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c7a4d;
+            --secondary: #1a5276;
+            --accent: #f39c12;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #27ae60;
+            --info: #2980b9;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f9f7;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .logo h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            text-align: center;
+        }
+        
+        .hero-content {
+            color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 0.9rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin: 0 0.5rem;
+        }
+        
+        .btn:hover {
+            background: #219653;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--success);
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: var(--success);
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background: #e67e22;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 3rem;
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .ai-solutions {
+            padding: 4rem 0;
+            background: linear-gradient(to bottom, #f8fcf9, #eaf5ed);
+        }
+        
+        .solutions-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        
+        .solution-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInCard 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeInCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .solution-card:nth-child(1) { animation-delay: 0.2s; }
+        .solution-card:nth-child(2) { animation-delay: 0.4s; }
+        .solution-card:nth-child(3) { animation-delay: 0.6s; }
+        
+        .solution-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .solution-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(44, 122, 77, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .solution-icon i {
+            font-size: 3.5rem;
+            color: var(--primary);
+        }
+        
+        .solution-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            color: var(--secondary);
+        }
+        
+        .solution-card p {
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .news-section {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInCard 0.6s ease-out forwards;
+        }
+        
+        .news-card:nth-child(1) { animation-delay: 0.2s; }
+        .news-card:nth-child(2) { animation-delay: 0.4s; }
+        .news-card:nth-child(3) { animation-delay: 0.6s; }
+        .news-card:nth-child(4) { animation-delay: 0.8s; }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        
+        .news-img {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .news-card:hover .news-img img {
+            transform: scale(1.08);
+        }
+        
+        .news-content {
+            padding: 1.8rem;
+        }
+        
+        .news-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .news-source {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .news-title {
+            font-size: 1.4rem;
+            margin: 0.8rem 0 1.2rem;
+            color: var(--secondary);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.4;
+        }
+        
+        .news-desc {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: var(--secondary);
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        .ai-impact {
+            padding: 5rem 0;
+            background: linear-gradient(to right, #eef9f2, #e3f5eb);
+        }
+        
+        .impact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .impact-content {
+            flex: 1;
+            min-width: 300px;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .impact-content h2 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .impact-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+        
+        .impact-stats {
+            flex: 1;
+            min-width: 300px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            opacity: 0;
+            transform: translateX(30px);
+            animation: fadeInRight 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+            line-height: 1;
+        }
+        
+        .stat-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+     
+     
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.9rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a i {
+            margin-right: 8px;
+            color: var(--accent);
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .footer-links a:hover i {
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+            color: #aaa;
+        }
+        
+        .news-loader {
+            text-align: center;
+            padding: 40px 0;
+            grid-column: 1 / -1;
+        }
+        
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid rgba(44, 122, 77, 0.2);
+            border-bottom-color: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 80%;
+                margin: 1rem auto;
+            }
+            
+            .impact-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-seedling"></i>
+                <h1>AgriTech News</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i> News</a></li>
+                    <!-- <li><a href="#market"><i class="fas fa-chart-line"></i> Market</a></li> -->
+                    <!-- <li><a href="#weather"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+                    <li><a href="#ai"><i class="fas fa-robot"></i> AI Tools</a></li> -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+   
+
+
+    <!-- News Section -->
+    <section class="news-section" id="news">
+        <div class="container">
+            <h2 class="section-title">Latest Agriculture News</h2>
+            <div class="news-grid" id="news-container">
+                <div class="news-loader">
+                    <div class="loader"></div>
+                    <p>Loading the latest agriculture news...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AgriTech News</h3>
+                    <p>Transforming agriculture through AI technology and data-driven insights to empower farmers and revolutionize food production.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Home</a></li>
+                        <li><a href="#news"><i class="fas fa-angle-right"></i> News</a></li>
+                        <li><a href="#market"><i class="fas fa-angle-right"></i> Market Prices</a></li>
+                        <li><a href="#weather"><i class="fas fa-angle-right"></i> Weather Forecast</a></li>
+                        <li><a href="#ai"><i class="fas fa-angle-right"></i> AI Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>News Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Technology</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Market Trends</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Sustainable Farming</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Government Policies</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Research & Innovation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to receive daily agriculture news and market updates.</p>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Your Email Address" required style="width:100%; padding:12px; margin:15px 0; border-radius:5px; border:none;">
+                        <button class="btn" style="width:100%;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 AgriTech News. All rights reserved. | Transforming Agriculture with AI Technology</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // News API integration
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to fetch news from News API
+            async function fetchAgricultureNews() {
+                const newsContainer = document.getElementById('news-container');
+                const loadingIndicator = newsContainer.querySelector('.news-loader');
+                
+                try {
+                    // In a real implementation, we would use:
+                    // const response = await fetch(`https://newsapi.org/v2/everything?q=agriculture&apiKey=YOUR_API_KEY`);
+                    // const data = await response.json();
+                    
+                    // For this demo, we'll use mock data to simulate API response
+                    const mockNews = {
+                        articles: [
+                            {
+                                title: "New AI System Predicts Crop Yields with 95% Accuracy",
+                                description: "Researchers at Stanford University have developed an AI model that can predict crop yields months in advance with unprecedented accuracy.",
+                                urlToImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                                url: "#",
+                                source: { name: "TechFarm Daily" },
+                                publishedAt: "2023-08-10T08:30:00Z",
+                                category: "Technology"
+                            },
+                            {
+                                title: "Vertical Farming Revolutionizes Urban Agriculture",
+                                description: "Vertical farming startups are expanding rapidly in major cities, providing fresh produce with 90% less water than traditional farming.",
+                                urlToImage: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                                url: "#",
+                                source: { name: "AgriTech Review" },
+                                publishedAt: "2023-08-08T14:45:00Z",
+                                category: "Innovation"
+                            },
+                            {
+                                title: "Climate-Resilient Crops Show Promise in Drought Conditions",
+                                description: "New genetically modified crops developed by agricultural scientists are showing remarkable resilience in drought-affected regions.",
+                                urlToImage: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1174&q=80",
+                                url: "#",
+                                source: { name: "Science Agriculture" },
+                                publishedAt: "2023-08-05T11:20:00Z",
+                                category: "Research"
+                            },
+                            {
+                                title: "Global Grain Prices Stabilize After Record Harvests",
+                                description: "Record harvests in North America and Eastern Europe have helped stabilize global grain prices after months of volatility.",
+                                urlToImage: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                                url: "#",
+                                source: { name: "Market Watch" },
+                                publishedAt: "2023-08-02T16:15:00Z",
+                                category: "Market"
+                            }
+                        ]
+                    };
+                    
+                    // Remove loading indicator
+                    newsContainer.innerHTML = '';
+                    
+                    // Display news articles
+                    mockNews.articles.forEach((article, index) => {
+                        const date = new Date(article.publishedAt).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        });
+                        
+                        const newsCard = document.createElement('div');
+                        newsCard.className = 'news-card';
+                        newsCard.innerHTML = `
+                            <div class="news-img">
+                                <img src="${article.urlToImage}" alt="${article.title}">
+                            </div>
+                            <span class="news-tag">${article.category}</span>
+                            <div class="news-content">
+                                <div class="news-source">
+                                    <span>${article.source.name}</span>
+                                    <span>${date}</span>
+                                </div>
+                                <h3 class="news-title">${article.title}</h3>
+                                <p class="news-desc">${article.description}</p>
+                                <a href="${article.url}" class="read-more">Read Full Story <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        `;
+                        newsCard.style.animationDelay = `${0.2 + (index * 0.2)}s`;
+                        newsContainer.appendChild(newsCard);
+                    });
+                    
+                    console.log("Agriculture news loaded successfully");
+                    
+                } catch (error) {
+                    console.error('Error fetching news:', error);
+                    newsContainer.innerHTML = `
+                        <div class="news-loader">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                            <p>Failed to load news. Please try again later.</p>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Fetch news when page loads
+            fetchAgricultureNews();
+            
+            // Update weather information
+            function updateWeather() {
+                const weatherInfo = document.getElementById('weather-info');
+                weatherInfo.innerHTML = '';
+                
+                // Simulated weather data
+                const weatherData = [
+                    { icon: 'fas fa-temperature-high', value: '24°C', label: 'Temperature' },
+                    { icon: 'fas fa-tint', value: '65%', label: 'Humidity' },
+                    { icon: 'fas fa-wind', value: '12 km/h', label: 'Wind' },
+                    { icon: 'fas fa-cloud-rain', value: '20%', label: 'Rain Chance' }
+                ];
+                
+                weatherData.forEach(item => {
+                    const weatherCard = document.createElement('div');
+                    weatherCard.className = 'weather-card';
+                    weatherCard.innerHTML = `
+                        <div class="weather-icon">
+                            <i class="${item.icon}"></i>
+                        </div>
+                        <div class="weather-value">${item.value}</div>
+                        <div class="weather-label">${item.label}</div>
+                    `;
+                    weatherInfo.appendChild(weatherCard);
+                });
+            }
+            
+            updateWeather();
+            
+            // Newsletter form submission
+            const newsletterForm = document.getElementById('newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const emailInput = this.querySelector('input[type="email"]');
+                    const email = emailInput.value.trim();
+                    
+                    if (email) {
+                        // Simulate form submission
+                        emailInput.value = '';
+                        alert('Thank you for subscribing to our newsletter!');
+                    }
+                });
+            }
+            
+            // Animation for cards on scroll
+            window.addEventListener('scroll', function() {
+                const cards = document.querySelectorAll('.solution-card, .stat-card');
+                cards.forEach(card => {
+                    const cardPosition = card.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if(cardPosition < screenPosition) {
+                        card.style.opacity = "1";
+                        card.style.transform = "translateY(0)";
+                    }
+                });
+            });
+            
+            // Trigger animations on page load
+            setTimeout(() => {
+                document.querySelectorAll('.solution-card, .stat-card').forEach(card => {
+                    card.style.opacity = "1";
+                    card.style.transform = "translateY(0)";
+                });
+                
+                document.querySelector('.impact-content').style.opacity = "1";
+                document.querySelector('.impact-content').style.transform = "translateX(0)";
+                document.querySelector('.impact-stats').style.opacity = "1";
+                document.querySelector('.impact-stats').style.transform = "translateX(0)";
+            }, 300);
+        });
+    </script>
+</body>
+</html>

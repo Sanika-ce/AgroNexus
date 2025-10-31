@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroTech - Modern Agriculture Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <img src="agro.png" alt="Agro Image" width="500">
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            
+            <nav>
+                <div class="logo">
+                    
+                    <i class="fas fa-seedling"></i>
+                    <span>AgroNexus</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Weather</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Shop</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" onclick="openLogin()">Login</button>
+                    <button class="btn btn-primary" onclick="openSignup()">Sign Up</button>
+                </div>
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transforming <span>Agriculture</span> with AI Technology</h1>
+                <p>Empowering farmers with cutting-edge AI solutions for crop prediction, fertilizer recommendations, weather forecasting, and direct market access.</p>
+                <button class="btn btn-primary">Get Started</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links">
+        <div class="container">
+            <div class="links-grid">
+                <!-- Home -->
+                <div class="link-block">
+                    <i class="fas fa-home"></i>
+                    <h3>Home</h3>
+                    <p>Return to the main dashboard with all features</p>
+                </div>
+                
+                <!-- About Us -->
+                <div class="link-block">
+                    <i class="fas fa-users"></i>
+                    <h3>About Us</h3>
+                    <p>Learn about our mission and team</p>
+                </div>
+                
+                <!-- Services -->
+                <div class="link-block">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Services</h3>
+                    <p>Explore our comprehensive agriculture solutions</p>
+                </div>
+                
+                <!-- Weather Forecast -->
+                <div class="link-block">
+                    <i class="fas fa-cloud-sun"></i>
+                    <h3>Weather Forecast</h3>
+                    <p>Get accurate 4-day weather predictions</p>
+                </div>
+                
+                <!-- News Updates -->
+                <div class="link-block">
+                    <i class="fas fa-newspaper"></i>
+                    <h3>News Updates</h3>
+                    <p>Latest agriculture news and insights</p>
+                </div>
+                
+                <!-- Login -->
+                <div class="link-block" onclick="openLogin()">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <h3>Login</h3>
+                    <p>Access your account and dashboard</p>
+                </div>
+                
+                <!-- Signup -->
+                <div class="link-block" onclick="openSignup()">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>Sign Up</h3>
+                    <p>Create a new account to get started</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Comprehensive Services</h2>
+                <p>We provide a full suite of agricultural technology solutions designed to empower farmers and optimize farming operations.</p>
+            </div>
+            <div class="services-grid">
+                <!-- Crop Prediction -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Crop Prediction</h3>
+                        <p>AI-powered recommendations for the best crops based on region, season, and soil data.</p>
+                        <button class="btn btn-outline">Learn More</button>
+                    </div>
+                </div>
+                
+                <!-- Fertilizer Recommendation -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Fertilizer Recommendation</h3>
+                        <p>Smart fertilizer suggestions based on soil nutrients (NPK), moisture, and crop type.</p>
+                        <button class="btn btn-outline">Learn More</button>
+                    </div>
+                </div>
+                
+                <!-- Rainfall & Yield Prediction -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud-rain"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Rainfall & Yield Prediction</h3>
+                        <p>Accurate forecasts using historical and regional data to plan your harvest.</p>
+                        <button class="btn btn-outline">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo">
+                        <i class="fas fa-seedling"></i>
+                        <span>AgroNexus</span>
+                    </div>
+                    <p>Transforming agriculture through technology and innovation to empower farmers worldwide.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Weather Forecast</a></li>
+                        <li><a href="#">News Updates</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Crop Prediction</a></li>
+                        <li><a href="#">Fertilizer Recommendation</a></li>
+                        <li><a href="#">Rainfall & Yield Prediction</a></li>
+                        <li><a href="#">AI Chatbot Support</a></li>
+                        <li><a href="#">Direct Crop Selling</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Farm Avenue, Agriculture City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@agrotech.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 AgroTech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Form -->
+    <div class="auth-container" id="login-container">
+        <div class="auth-form" id="login-form">
+            <span class="close-btn" onclick="closeAuth()">&times;</span>
+            <h2>Login to Your Account</h2>
+            <div class="form-group">
+                <label for="login-email">Email Address</label>
+                <input type="email" id="login-email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password">
+            </div>
+            <button class="btn btn-primary" style="width: 100%;">Login</button>
+            <div class="form-footer">
+                <div class="form-switch">
+                    Don't have an account? <a href="#" onclick="switchToSignup()">Sign Up</a>
+                </div>
+                <p><a href="#">Forgot your password?</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="auth-container" id="signup-container">
+        <div class="auth-form" id="signup-form">
+            <span class="close-btn" onclick="closeAuth()">&times;</span>
+            <h2>Create New Account</h2>
+            <div class="form-group">
+                <label for="signup-name">Full Name</label>
+                <input type="text" id="signup-name" placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="signup-email">Email Address</label>
+                <input type="email" id="signup-email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" placeholder="Create a password">
+            </div>
+            <div class="form-group">
+                <label for="signup-confirm">Confirm Password</label>
+                <input type="password" id="signup-confirm" placeholder="Confirm your password">
+            </div>
+            <button class="btn btn-primary" style="width: 100%;">Create Account</button>
+            <div class="form-footer">
+                <div class="form-switch">
+                    Already have an account? <a href="#" onclick="switchToLogin()">Login</a>
+                </div>
+                <p>By signing up, you agree to our <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="home.js">
+       
+    </script>
+</body>
+</html>

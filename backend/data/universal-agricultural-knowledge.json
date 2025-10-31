@@ -1,0 +1,176 @@
+[
+  {
+    "title": "Winter Crops (Rabi Season)",
+    "content": "Rabi crops are winter season crops sown in October-December and harvested in March-April. Major crops include Wheat, Barley, Mustard, Peas, Gram, Lentils, Chickpeas. These crops require cool weather for growth and regular irrigation. Rabi crops are important for food security and include cereals, pulses, and oilseeds.",
+    "type": "crops_seasons",
+    "category": "crops",
+    "keywords": [
+      "winter",
+      "rabi",
+      "wheat",
+      "barley",
+      "mustard",
+      "october",
+      "december",
+      "march",
+      "april",
+      "harvest",
+      "sowing"
+    ]
+  },
+  {
+    "title": "Summer Crops (Kharif Season)",
+    "content": "Kharif crops are monsoon season crops sown in June-July with the onset of rains and harvested in September-October. Major crops include Rice, Maize, Cotton, Soybean, Groundnut, Sugarcane, Turmeric. These crops depend on monsoon rainfall and require warm weather conditions.",
+    "type": "crops_seasons",
+    "category": "crops",
+    "keywords": [
+      "summer",
+      "kharif",
+      "monsoon",
+      "rice",
+      "maize",
+      "cotton",
+      "june",
+      "july",
+      "september",
+      "october"
+    ]
+  },
+  {
+    "title": "Zaid Crops (Summer Season)",
+    "content": "Zaid crops are short duration summer crops grown between March and June. Major crops include Watermelon, Muskmelon, Cucumber, Bitter gourd, Pumpkin. These crops require warm weather and irrigation facilities.",
+    "type": "crops_seasons",
+    "category": "crops",
+    "keywords": [
+      "zaid",
+      "summer",
+      "cucumber",
+      "watermelon",
+      "pumpkin",
+      "march",
+      "june"
+    ]
+  },
+  {
+    "title": "Modern Farming Technologies",
+    "content": "Modern agricultural technologies include Precision farming using GPS and sensors, Drip and sprinkler irrigation systems, Drone technology for crop monitoring, Solar powered equipment, Automated machinery, Mobile applications for market prices and weather, Digital soil testing kits, Greenhouse farming, and Hydroponics. These technologies help increase yield by 20-30% and reduce costs by 15-25%.",
+    "type": "farming_practices",
+    "category": "technology",
+    "keywords": [
+      "technology",
+      "modern",
+      "digital",
+      "precision",
+      "drone",
+      "sensor",
+      "automation",
+      "smart",
+      "innovation"
+    ]
+  },
+  {
+    "title": "Organic Farming Methods",
+    "content": "Organic farming avoids synthetic chemicals and uses natural methods including Crop rotation, Green manure, Compost, Biological pest control, Mechanical cultivation, and Animal manure. Benefits include improved soil health, reduced environmental pollution, chemical-free food production, and enhanced biodiversity. Organic certification is available through government schemes.",
+    "type": "farming_practices",
+    "category": "sustainable",
+    "keywords": [
+      "organic",
+      "natural",
+      "compost",
+      "pest control",
+      "soil health",
+      "chemical-free",
+      "sustainable"
+    ]
+  },
+  {
+    "title": "Soil Preparation Techniques",
+    "content": "Proper soil preparation involves Plowing to loosen soil, Leveling for even water distribution, Adding organic matter and compost, Soil testing for nutrient analysis, and adjusting pH levels. Different crops require specific soil conditions - cereals prefer neutral pH while pulses grow well in slightly acidic soils.",
+    "type": "soil_water",
+    "category": "cultivation",
+    "keywords": [
+      "soil",
+      "preparation",
+      "plowing",
+      "compost",
+      "fertilizer",
+      "pH",
+      "nutrient"
+    ]
+  },
+  {
+    "title": "Efficient Irrigation Methods",
+    "content": "Modern irrigation methods include Drip irrigation (water directly to roots, 30-50% saving), Sprinkler systems (simulated rainfall, 25-35% saving), Subsurface irrigation, and Solar-powered systems. Benefits include water conservation, reduced evaporation, better crop yield, and energy efficiency. Government subsidies available under PMKSY scheme.",
+    "type": "soil_water",
+    "category": "water_management",
+    "keywords": [
+      "irrigation",
+      "drip",
+      "sprinkler",
+      "water",
+      "conservation",
+      "efficient",
+      "saving"
+    ]
+  },
+  {
+    "title": "PMKSY - Per Drop More Crop",
+    "content": "Pradhan Mantri Krishi Sinchayee Yojana (PMKSY) focuses on water use efficiency through micro-irrigation. Components include Drip irrigation, Sprinkler systems, and Other water management interventions. Subsidy: 55% for small farmers, 45% for others. Benefits: 30-50% water saving and 20-30% yield increase.",
+    "type": "government_schemes",
+    "category": "subsidies",
+    "keywords": [
+      "pmksy",
+      "irrigation",
+      "subsidy",
+      "water",
+      "efficiency",
+      "government",
+      "scheme"
+    ]
+  },
+  {
+    "title": "Soil Health Card Scheme",
+    "content": "Soil Health Card scheme provides farmers with soil health cards every 3 years. It shows nutrient status of soil and recommends appropriate fertilizer dosage. Helps in balanced fertilizer use, improves soil health, and reduces input costs. Available through local agriculture offices.",
+    "type": "government_schemes",
+    "category": "soil_health",
+    "keywords": [
+      "soil health",
+      "fertilizer",
+      "nutrient",
+      "government",
+      "scheme",
+      "card"
+    ]
+  },
+  {
+    "title": "High Demand Crops in Indian Market",
+    "content": "Crops with consistently high market demand in India: Basmati Rice (export demand), Wheat (staple food), Pulses (protein source), Fruits & Vegetables (daily consumption), Spices (turmeric, chili for export), Medicinal Plants (growing Ayurveda demand), Organic Produce (premium markets). Market prices vary by season and region.",
+    "type": "market_economics",
+    "category": "marketing",
+    "keywords": [
+      "market",
+      "demand",
+      "price",
+      "profit",
+      "income",
+      "business",
+      "economics",
+      "high value"
+    ]
+  },
+  {
+    "title": "Integrated Pest Management",
+    "content": "Integrated Pest Management (IPM) combines cultural methods (crop rotation), biological control (natural predators), mechanical methods (traps), and chemical pesticides as last resort. Benefits: Reduces pesticide use by 40-60%, maintains ecological balance, and is cost-effective. Always follow recommended safety periods.",
+    "type": "pest_management",
+    "category": "crop_protection",
+    "keywords": [
+      "pest",
+      "disease",
+      "management",
+      "control",
+      "ipm",
+      "insects",
+      "protection"
+    ]
+  }
+]

@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroNexus - Account Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            height: 50%;
+        }
+       
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #2e7d32;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 16px;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #2e7d32;
+            color: #2e7d32;
+        }
+        
+        .btn-outline:hover {
+            background-color: #2e7d32;
+            color: #fff;
+        }
+        
+        .btn-primary {
+            background-color: #2e7d32;
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1b5e20;
+        }
+        
+        /* Main Content */
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        
+        .auth-illustration {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(27, 94, 32, 0.2)), 
+                        url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            display: none;
+        }
+        
+        .auth-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        .auth-card {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+        }
+        
+        .auth-header {
+            background-color: #2e7d32;
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .auth-header h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .auth-header p {
+            opacity: 0.9;
+        }
+        
+        .auth-body {
+            padding: 30px;
+        }
+        
+        .account-type-selection {
+            margin-bottom: 30px;
+        }
+        
+        .account-type-selection h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #444;
+        }
+        
+        .account-types {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .account-type {
+            flex: 1;
+            min-width: 140px;
+            padding: 20px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+        
+        .account-type:hover {
+            border-color: #81c784;
+            background-color: rgba(129, 199, 132, 0.1);
+        }
+        
+        .account-type.active {
+            border-color: #2e7d32;
+            background-color: rgba(46, 125, 50, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .account-type i {
+            font-size: 36px;
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        
+        .account-type h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .account-type p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            border-color: #2e7d32;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+        }
+        
+        .form-footer {
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .form-footer p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .form-switch {
+            margin-top: 20px;
+            font-size: 15px;
+        }
+        
+        .form-switch a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .form-switch a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Form Steps */
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #fff;
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        .step.active {
+            background-color: #2e7d32;
+        }
+        
+        .step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 20px;
+            height: 2px;
+            background-color: #e0e0e0;
+        }
+        
+        .step.active:after {
+            background-color: #2e7d32;
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn-container .btn {
+            flex: 1;
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 992px) {
+            .auth-illustration {
+                display: flex;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .account-types {
+                flex-direction: column;
+            }
+            
+            .account-type {
+                min-width: 100%;
+            }
+            
+            .auth-content {
+                padding: 20px;
+            }
+            
+            .auth-body {
+                padding: 20px;
+            }
+        }
+        
+        /* Form validation */
+        .form-group .error {
+            color: #e53935;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-group.invalid input {
+            border-color: #e53935;
+        }
+        
+        .form-group.invalid .error {
+            display: block;
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <span>AgroNexus</span>
+                </div>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" onclick="window.location.href='home.html'">Back to Home</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Illustration Section -->
+        <div class="auth-illustration">
+            <div class="illustration-content">
+                <h2 style="color: white; font-size: 36px; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Join the AgroNexus Community</h2>
+                <p style="color: white; font-size: 18px; max-width: 500px; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">
+                    Connect with farmers, customers, and agricultural experts to transform the future of farming through technology and collaboration.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Auth Form Section -->
+        <div class="auth-content">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>Login Your Account</h2>
+                    <p>Select your account type to get started</p>
+                </div>
+                
+                <div class="auth-body">
+                    <!-- Step 1: Account Type Selection -->
+                    <div id="step-1" class="form-step active">
+                        <div class="step-indicator">
+                            <div class="step active">1</div>
+                            <div class="step">2</div>
+                            <div class="step">3</div>
+                        </div>
+                        
+                        <div class="account-type-selection">
+                            <h3>I am a:</h3>
+                            <div class="account-types">
+                                <div class="account-type" data-type="farmer" onclick="selectAccountType(this)">
+                                    <i class="fas fa-tractor"></i>
+                                    <h4>Farmer</h4>
+                                    <p>Cultivate and sell your products</p>
+                                </div>
+                                <div class="account-type" data-type="customer" onclick="selectAccountType(this)">
+                                    <i class="fas fa-shopping-basket"></i>
+                                    <h4>Customer</h4>
+                                    <p>Buy fresh farm products</p>
+                                </div>
+                            </div>
+                            
+                            <div class="account-types">
+                                <div class="account-type" data-type="admin" onclick="selectAccountType(this)">
+                                    <i class="fas fa-user-cog"></i>
+                                    <h4>Admin</h4>
+                                    <p>Manage platform operations</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-footer">
+                            <p>Already have an account? <a href="sign.html" >Sign In</a></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Registration Form -->
+                    <div id="step-2" class="form-step">
+                        <div class="step-indicator">
+                            <div class="step">1</div>
+                            <div class="step active">2</div>
+                            <div class="step">3</div>
+                        </div>
+<!--                        
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" id="fullname" placeholder="Enter your full name">
+                            <div class="error">Please enter your full name</div>
+                        </div>-->
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="Enter your email">
+                            <div class="error">Please enter a valid email address</div>
+                        </div>
+                        
+                        <!--<div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="Enter your phone number">
+                            <div class="error">Please enter a valid phone number</div>
+                        </div>-->
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="password-container">
+                                <input type="password" id="password" placeholder="Create a password">
+                                <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password')"></i>
+                            </div>
+                            <div class="error">Password must be at least 8 characters</div>
+                        </div>
+                        
+                
+                        <div class="btn-container">
+                            <button class="btn btn-outline" onclick="previousStep()">Back</button>
+                            <!--<button class="btn btn-primary" onclick="nextStep()">Login</button>-->
+                             <button class="btn btn-primary" onclick="window.location.href='home.html?show=signup'">Sign In</button>
+                        </div>
+                    
+                    
+                    <!-- Step 3: Additional Information -->
+                    <div id="step-3" class="form-step">
+                        <div class="step-indicator">
+                            <div class="step">1</div>
+                            <div class="step">2</div>
+                            <div class="step active">3</div>
+                        </div>
+                        
+                        <!-- Farmer-specific fields -->
+                        <div id="farmer-fields" class="account-fields">
+                            <div class="form-group">
+                                <label for="farm-name">Farm Name</label>
+                                <input type="text" id="farm-name" placeholder="Enter your farm name">
+                                <div class="error">Please enter your farm name</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="location">Farm Location</label>
+                                <input type="text" id="location" placeholder="Enter your farm location">
+                                <div class="error">Please enter your farm location</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="crops">Main Crops</label>
+                                <input type="text" id="crops" placeholder="What crops do you grow?">
+                            </div>
+                        </div>
+                        
+                        <!-- Customer-specific fields -->
+                        <div id="customer-fields" class="account-fields">
+                            <div class="form-group">
+                                <label for="address">Shipping Address</label>
+                                <input type="text" id="address" placeholder="Enter your shipping address">
+                                <div class="error">Please enter your shipping address</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="preferences">Product Preferences</label>
+                                <select id="preferences" class="form-control">
+                                    <option value="">Select your preferences</option>
+                                    <option value="vegetables">Vegetables</option>
+                                    <option value="fruits">Fruits</option>
+                                    <option value="dairy">Dairy Products</option>
+                                    <option value="grains">Grains & Cereals</option>
+                                    <option value="all">All Products</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Admin-specific fields -->
+                        <div id="admin-fields" class="account-fields">
+                            <div class="form-group">
+                                <label for="admin-code">Admin Access Code</label>
+                                <input type="password" id="admin-code" placeholder="Enter admin access code">
+                                <div class="error">Invalid access code</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="department">Department</label>
+                                <select id="department" class="form-control">
+                                    <option value="">Select department</option>
+                                    <option value="operations">Operations</option>
+                                    <option value="support">Customer Support</option>
+                                    <option value="content">Content Management</option>
+                                    <option value="technical">Technical Team</option>
+                                </select>
+                                <div class="error">Please select a department</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="terms">
+                                I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                            </label>
+                            <div class="error" id="terms-error">You must agree to the terms</div>
+                        </div>
+                        
+                        <div class="btn-container">
+                            <button class="btn btn-outline" onclick="previousStep()">Back</button>
+                            <button class="btn btn-primary" onclick="registerAccount()">Create Account</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedAccountType = '';
+        let currentStep = 1;
+        
+        // Select account type
+        function selectAccountType(element) {
+            // Remove active class from all account types
+            document.querySelectorAll('.account-type').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Add active class to selected account type
+            element.classList.add('active');
+            
+            // Store selected account type
+            selectedAccountType = element.getAttribute('data-type');
+            
+            // Show next step after a short delay
+            setTimeout(() => {
+                nextStep();
+            }, 300);
+        }
+        
+        // Navigate to next step
+        function nextStep() {
+            // Validate step 1
+            if (currentStep === 1) {
+                if (!selectedAccountType) {
+                    alert('Please select an account type');
+                    return;
+                }
+            }
+            
+            // Validate step 2
+            if (currentStep === 2) {
+                if (!validateStep2()) {
+                    return;
+                }
+            }
+            
+            // Hide current step
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            
+            // Move to next step
+            currentStep++;
+            
+            // Show next step
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            
+            // Show appropriate fields for account type in step 3
+            if (currentStep === 3) {
+                document.querySelectorAll('.account-fields').forEach(el => {
+                    el.style.display = 'none';
+                });
+                document.getElementById(`${selectedAccountType}-fields`).style.display = 'block';
+            }
+        }
+        
+        // Navigate to previous step
+        function previousStep() {
+            // Hide current step
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            
+            // Move to previous step
+            currentStep--;
+            
+            // Show previous step
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+        }
+        
+        // Validate step 2 form
+        function validateStep2() {
+            let isValid = true;
+            const formGroups = document.querySelectorAll('#step-2 .form-group');
+            
+            // Reset errors
+            formGroups.forEach(group => {
+                group.classList.remove('invalid');
+            });
+            
+            // Validate full name
+            const fullName = document.getElementById('fullname').value.trim();
+            if (!fullName) {
+                document.querySelector('#step-2 .form-group:nth-child(2)').classList.add('invalid');
+                isValid = false;
+            }
+            
+            // Validate email
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailRegex.test(email)) {
+                document.querySelector('#step-2 .form-group:nth-child(3)').classList.add('invalid');
+                isValid = false;
+            }
+            
+            // Validate password
+            const password = document.getElementById('password').value;
+            if (password.length < 8) {
+                document.querySelector('#step-2 .form-group:nth-child(5)').classList.add('invalid');
+                isValid = false;
+            }
+            
+            // Validate password confirmation
+            const confirmPassword = document.getElementById('confirm-password').value;
+            if (password !== confirmPassword) {
+                document.querySelector('#step-2 .form-group:nth-child(6)').classList.add('invalid');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        // Register account
+        function registerAccount() {
+            // Validate step 3
+            let isValid = true;
+            
+            // Check terms agreement
+            if (!document.getElementById('terms').checked) {
+                document.getElementById('terms-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('terms-error').style.display = 'none';
+            }
+            
+            // Account-specific validation
+            if (selectedAccountType === 'farmer') {
+                const farmName = document.getElementById('farm-name').value.trim();
+                const location = document.getElementById('location').value.trim();
+                
+                if (!farmName) {
+                    document.querySelector('#farmer-fields .form-group:first-child').classList.add('invalid');
+                    isValid = false;
+                }
+                
+                if (!location) {
+                    document.querySelector('#farmer-fields .form-group:nth-child(2)').classList.add('invalid');
+                    isValid = false;
+                }
+            } 
+            else if (selectedAccountType === 'customer') {
+                const address = document.getElementById('address').value.trim();
+                if (!address) {
+                    document.querySelector('#customer-fields .form-group:first-child').classList.add('invalid');
+                    isValid = false;
+                }
+            } 
+            else if (selectedAccountType === 'admin') {
+                const adminCode = document.getElementById('admin-code').value;
+                const department = document.getElementById('department').value;
+                
+                if (adminCode !== 'AGRO2023') {
+                    document.querySelector('#admin-fields .form-group:first-child').classList.add('invalid');
+                    isValid = false;
+                }
+                
+                if (!department) {
+                    document.querySelector('#admin-fields .form-group:nth-child(2)').classList.add('invalid');
+                    isValid = false;
+                }
+            }
+            
+            if (!isValid) return;
+            
+            // Show success message
+            alert(`Account created successfully! Welcome to AgroNexus as a ${selectedAccountType}.`);
+            
+            // Redirect to dashboard
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        }
+        
+        // Toggle password visibility
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = document.querySelector(`#${inputId} + .toggle-password`);
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+        
+        // Show login form
+        //function showLogin() {
+        //    alert('Redirecting to login page...');
+        //}
+        function handleSignIn() {
+    // Redirect to home.html with a parameter to show signup form
+    window.location.href = 'home.html?show=signup';
+}
+    </script>
+</body>
+</html>

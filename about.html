@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About AgroNexus</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --primary: #2e7d32;
+        --dark: #1b5e20;
+    }
+
+    /* ---------- GLOBAL STYLES ---------- */
+    body {
+        font-family: 'Poppins', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        background: url('https://timesofagriculture.in/wp-content/uploads/2023/10/1600x800_Natural_farming-1024x576.jpg') no-repeat center center fixed;
+        background-size: cover;
+        position: relative;
+    }
+
+    /* Add overlay for readability */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(255, 255, 255, 0.85);
+        z-index: -1;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+        background: var(--primary);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 30px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    header .logo {
+        font-size: 24px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    header nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+    header nav a:hover {
+        color: #c8e6c9;
+    }
+
+    /* ---------- TITLE ---------- */
+    h1 {
+        text-align: center;
+        color: var(--dark);
+        font-size: 36px;
+        margin-top: 40px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- SECTIONS ---------- */
+    .section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1100px;
+        margin: 60px auto;
+        background: rgba(255,255,255,0.95);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        overflow: hidden;
+        transition: 0.3s ease;
+    }
+
+    .section:hover {
+        transform: translateY(-5px);
+    }
+
+    .section:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+
+    .section img {
+        width: 50%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .content {
+        padding: 30px 40px;
+        width: 50%;
+    }
+
+    .content h2 {
+        color: var(--primary);
+        border-left: 5px solid var(--primary);
+        padding-left: 10px;
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .content ul {
+        list-style: none;
+        padding-left: 10px;
+    }
+
+    .content li {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    .content li i {
+        color: var(--primary);
+        margin-right: 8px;
+    }
+
+    /* ---------- CONTACT SECTION ---------- */
+    .contact-section {
+        text-align: center;
+        background: rgba(255,255,255,0.95);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        margin: 60px auto;
+        max-width: 800px;
+    }
+
+    .contact-section h2 {
+        color: var(--primary);
+        margin-bottom: 15px;
+    }
+
+    .contact-section a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .contact-section a:hover {
+        text-decoration: underline;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+        .section {
+            flex-direction: column;
+        }
+
+        .section:nth-child(even) {
+            flex-direction: column;
+        }
+
+        .section img, .content {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><i class="fa-solid fa-seedling"></i> AgroNexus</div>
+    <nav>
+        <a href="home.html"><i class="fa-solid fa-house"></i> Home</a>
+    </nav>
+</header>
+
+<h1><i class="fa-solid fa-leaf"></i> About AgroNexus</h1>
+
+<!-- Objectives -->
+<div class="section">
+    <div class="content">
+        <h2>Objectives</h2>
+        <ul>
+            <li><i class="fa-solid fa-check-circle"></i> Provide AI-based crop recommendations.</li>
+            <li><i class="fa-solid fa-check-circle"></i> Deliver smart fertilizer guidance.</li>
+            <li><i class="fa-solid fa-check-circle"></i> Integrate weather forecasting.</li>
+            <li><i class="fa-solid fa-check-circle"></i> Offer market insights for farmers.</li>
+            <li><i class="fa-solid fa-check-circle"></i> Promote eco-friendly practices.</li>
+        </ul>
+    </div>
+    <img src="https://img.freepik.com/premium-photo/farmers-with…ulture-gardening-ecology-concept_217236-10042.jpg" alt="Objectives">
+</div>
+
+<!-- Key Features -->
+<div class="section">
+    <div class="content">
+        <h2>Key Features</h2>
+        <ul>
+            <li><i class="fa-solid fa-leaf"></i> Crop prediction based on soil & season.</li>
+            <li><i class="fa-solid fa-flask"></i> Fertilizer recommendations by soil data.</li>
+            <li><i class="fa-solid fa-cloud-sun"></i> Weather forecasting for planning.</li>
+            <li><i class="fa-solid fa-seedling"></i> Crop rotation suggestions.</li>
+            <li><i class="fa-solid fa-mobile-screen"></i> User-friendly responsive design.</li>
+        </ul>
+    </div>
+    <img src=https://www.shutterstock.com/image-photo/empowerin…-farmers-technological-touch-600nw-2330614993.jpg alt="Features">
+</div>
+
+<!-- Who Can Use -->
+<div class="section">
+    <div class="content">
+        <h2>Who Can Use</h2>
+        <ul>
+            <li><i class="fa-solid fa-user"></i> Farmers for improved yield.</li>
+            <li><i class="fa-solid fa-book"></i> Agricultural students and researchers.</li>
+            <li><i class="fa-solid fa-users"></i> Anyone interested in smart farming.</li>
+        </ul>
+    </div>
+    <img src="	https://www.csm.tech/storage/uploads/news/67656270418611734697584Thumb.jpg" alt="Users">
+</div>
+
+<!-- Technology Stack -->
+<div class="section">
+    <div class="content">
+        <h2>Technology Stack</h2>
+        <ul>
+            <li><i class="fa-brands fa-html5"></i> Frontend: HTML, CSS, JavaScript</li>
+            <li><i class="fa-solid fa-server"></i> Backend: Node.js / Python / PHP</li>
+            <li><i class="fa-solid fa-cloud"></i> APIs for weather & AI prediction</li>
+            <li><i class="fa-solid fa-database"></i> Database for recommendations</li>
+        </ul>
+    </div>
+    <img src="https://farmwella.com/wp-content/uploads/2023/05/direct-to-consumer-600x600.png" alt="Technology">
+</div>
+
+<!-- How It Works -->
+<div class="section">
+    <div class="content">
+        <h2>How It Works</h2>
+        <ul>
+            <li><i class="fa-solid fa-hand-pointer"></i> Select crop, soil, and season.</li>
+            <li><i class="fa-solid fa-robot"></i> AI generates instant recommendations.</li>
+            <li><i class="fa-solid fa-lightbulb"></i> Get tips for better crop management.</li>
+        </ul>
+    </div>
+    <img src="	https://miro.medium.com/1*hKfTDj-4f0swj-I_c9Aypg.jpeg" alt="How It Works">
+</div>
+
+<!-- Benefits -->
+<div class="section">
+    <div class="content">
+        <h2>Benefits</h2>
+        <ul>
+            <li><i class="fa-solid fa-clock"></i> Save time & increase productivity.</li>
+            <li><i class="fa-solid fa-vial-circle-check"></i> Reduce overuse of fertilizers.</li>
+            <li><i class="fa-solid fa-leaf"></i> Promote eco-friendly farming.</li>
+            <li><i class="fa-solid fa-mobile"></i> Access anywhere, anytime.</li>
+        </ul>
+    </div>
+    <img src="https://knowhow.distrelec.com/wp-content/uploads/2021/10/iStock-1187320693.jpg" alt="Benefits">
+</div>
+
+<!-- Contact -->
+<div class="contact-section">
+    <h2>Contact / Developer Info</h2>
+    <p>Developed by <strong>Asmita, Sanika, Prerna</strong></p>
+    <p>Email: <a href="mailto:youremail@example.com"><i class="fa-solid fa-envelope"></i> youremail@example.com</a></p>
+    <p>GitHub: <a href="https://github.com/yourusername" target="_blank"><i class="fa-brands fa-github"></i> github.com/yourusername</a></p>
+</div>
+
+</body>
+</html>
+
+
+

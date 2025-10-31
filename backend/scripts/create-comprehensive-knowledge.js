@@ -1,0 +1,106 @@
+// create-comprehensive-knowledge.js
+const fs = require('fs');
+const path = require('path');
+
+const COMPREHENSIVE_AGRICULTURAL_KNOWLEDGE = [
+    // ================== CROPS & SEASONS ==================
+    {
+        title: "Rabi Season Crops (Winter)",
+        content: "Rabi crops sown October-December, harvested March-April: Wheat, Barley, Mustard, Gram, Lentils, Peas. Require cool weather and irrigation. Major states: Punjab, Haryana, Uttar Pradesh, Madhya Pradesh. Wheat is the most important rabi crop.",
+        type: "crops_seasons",
+        category: "crops",
+        keywords: ["rabi", "winter", "wheat", "barley", "mustard", "gram", "october", "december", "march", "april", "हिवाळा", "रबी", "गहू", "गेहूं", "সরষে", "கோதுமை"]
+    },
+    {
+        title: "Kharif Season Crops (Monsoon)", 
+        content: "Kharif crops sown with monsoon June-July, harvested September-October: Rice, Maize, Cotton, Soybean, Groundnut, Sugarcane. Depend on rainfall. Major states: West Bengal, Andhra Pradesh, Tamil Nadu, Karnataka.",
+        type: "crops_seasons",
+        category: "crops",
+        keywords: ["kharif", "monsoon", "rice", "cotton", "soybean", "maize", "june", "july", "september", "october", "मान्सून", "खरीप", "तांदूळ", "कापूस", "ধান", "நெல்"]
+    },
+    {
+        title: "Zaid Season Crops (Summer)",
+        content: "Zaid crops grown March-June: Watermelon, Muskmelon, Cucumber, Bitter gourd, Pumpkin. Require warm weather and irrigation. Short duration crops between rabi and kharif seasons.",
+        type: "crops_seasons",
+        category: "crops", 
+        keywords: ["zaid", "summer", "watermelon", "cucumber", "pumpkin", "march", "june", "उन्हाळा", "झैद", "टरबूज", "काकडी", "கார்ப்பண்ட்"]
+    },
+
+    // ================== SOIL & FERTILIZERS ==================
+    {
+        title: "Organic Manures and Soil Fertility",
+        content: "Organic manures for soil fertility: Farmyard manure, Compost, Vermicompost, Green manure, Bio-fertilizers. Benefits: Improves soil structure, increases water retention, provides slow-release nutrients. Recommended dosage: 5-10 tons per hectare annually.",
+        type: "soil_fertilizer",
+        category: "soil",
+        keywords: ["organic", "manure", "compost", "vermicompost", "soil fertility", "fertilizer", "सेंद्रिय खत", "कंपोस्ट", "गोबर", "মাটির উর্বরতা", "ஜৈவ உரம்"]
+    },
+    {
+        title: "Soil Testing and Nutrient Management",
+        content: "Soil testing every 2-3 years for balanced fertilization. Major nutrients: Nitrogen (N), Phosphorus (P), Potassium (K). Secondary: Calcium, Magnesium, Sulfur. Micronutrients: Zinc, Iron, Copper. Soil Health Card provides specific recommendations.",
+        type: "soil_fertilizer",
+        category: "soil",
+        keywords: ["soil testing", "nutrient", "nitrogen", "phosphorus", "potassium", "soil health card", "माती चाचणी", "पोषक", "मृदा स्वास्थ्य कार्ड", "মাটি পরীক্ষা", "மண் பரிசோதனை"]
+    },
+
+    // ================== PEST & DISEASE MANAGEMENT ==================
+    {
+        title: "Fungal Disease Control in Crops",
+        content: "Common fungal diseases: Blast in rice, Rust in wheat, Powdery mildew in grapes, Leaf spot in cotton. Control: Resistant varieties, Crop rotation, Proper spacing, Fungicides (Carbendazim, Mancozeb), Biological control (Trichoderma). Preventive measures more effective than curative.",
+        type: "disease_management",
+        category: "pest", 
+        keywords: ["fungal disease", "blast", "rust", "powdery mildew", "fungicide", "crop rotation", "बुरशीजन्य रोग", "तपकिरी डाग", "फंगीसायड", "பூஞ்சை நோய்", "ছত্রাক রোগ"]
+    },
+    {
+        title: "Integrated Pest Management (IPM)",
+        content: "IPM strategies: Cultural methods (crop rotation), Biological control (natural predators), Mechanical methods (traps), Chemical pesticides as last resort. Reduces pesticide use by 40-60%, maintains ecological balance. Government promotes IPM through KVKs.",
+        type: "pest_management",
+        category: "pest",
+        keywords: ["pest management", "ipm", "biological control", "pesticide", "कीट नियंत्रण", "समन्वित कीट प्रबंधन", "কীটপতঙ্গ নিয়ন্ত্রণ", "பூச்சி மேலாண்மை"]
+    },
+
+    // ================== IRRIGATION & WATER ==================
+    {
+        title: "Water Efficient Irrigation Methods",
+        content: "Efficient irrigation: Drip irrigation (50-60% water saving), Sprinkler systems (30-40% saving), Rainwater harvesting, Subsurface irrigation. Drip ideal for vegetables and orchards, sprinkler for field crops. Government subsidies up to 55% under PMKSY.",
+        type: "irrigation_water",
+        category: "irrigation", 
+        keywords: ["irrigation", "drip", "sprinkler", "water saving", "rainwater harvesting", "सिंचन", "ड्रिप", "स्प्रिंकलर", "পানির সেচ", "நீர்ப்பாசனம்"]
+    },
+
+    // ================== GOVERNMENT SCHEMES ==================
+    {
+        title: "PM-KISAN Scheme",
+        content: "Pradhan Mantri Kisan Samman Nidhi: ₹6000 per year in 3 installments to all landholding farmer families. Direct benefit transfer to bank accounts. Eligibility: All farmer families irrespective of land size. Apply through local agriculture office or Common Service Centers.",
+        type: "government_schemes",
+        category: "government",
+        keywords: ["pm-kisan", "government scheme", "subsidy", "financial assistance", "पीएम-किसान", "सरकारी योजना", "ভর্তুকি", "அரசு திட்டம்"]
+    },
+    {
+        title: "Soil Health Card Scheme", 
+        content: "Soil Health Card: Provides soil nutrient status every 3 years. Recommends appropriate fertilizer dosage. Helps in balanced fertilizer use, reduces input costs, improves soil health. Available free from local agriculture departments.",
+        type: "government_schemes",
+        category: "government",
+        keywords: ["soil health card", "soil testing", "fertilizer recommendation", "मृदा स्वास्थ्य कार्ड", "মাটি স্বাস্থ্য কার্ড", "மண் ஆரோக்கிய அட்டை"]
+    },
+
+    // ================== MARKET & ECONOMICS ==================
+    {
+        title: "Agricultural Marketing and Prices",
+        content: "Marketing options: APMC mandis, e-NAM online platform, Direct marketing, Contract farming. Minimum Support Price for 23 crops. Check daily prices on Agmarknet portal. Storage and proper timing crucial for better price realization.",
+        type: "market_economics", 
+        category: "market",
+        keywords: ["market", "price", "mandi", "e-nam", "msp", "बाजार", "किंमत", "मंडी", "বাজার", "விலை"]
+    }
+];
+
+function createComprehensiveKnowledge() {
+    const dataPath = path.join(__dirname, '../data/comprehensive-agricultural-knowledge.json');
+    
+    // Save comprehensive knowledge base
+    fs.writeFileSync(dataPath, JSON.stringify(COMPREHENSIVE_AGRICULTURAL_KNOWLEDGE, null, 2));
+    console.log(`✅ Created comprehensive agricultural knowledge base with ${COMPREHENSIVE_AGRICULTURAL_KNOWLEDGE.length} entries`);
+    
+    return COMPREHENSIVE_AGRICULTURAL_KNOWLEDGE;
+}
+
+createComprehensiveKnowledge();

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroNexus - Weather Forecast</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="wheather.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <span>AgroNexus</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="weather.html" class="active">Weather</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Shop</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">Login</button>
+                    <button class="btn btn-primary">Sign Up</button>
+                </div>
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Weather Hero Section -->
+    <section class="weather-hero">
+        <div class="container">
+            <h1>Agriculture Weather Forecast</h1>
+            <p>Get accurate 4-day weather predictions tailored for your farming activities</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <div class="container">
+        <div class="search-container">
+            <h2>Select Your Location</h2>
+            <div class="search-box">
+                <select id="state-select">
+                    <option value="">Select State</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Punjab">Punjab</option>
+                </select>
+                
+                <select id="district-select">
+                    <option value="">Select District</option>
+                </select>
+                
+                <select id="village-select" disabled>
+                    <option value="">Select Village</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="get-weather-btn">
+                <i class="fas fa-cloud-sun"></i> Get Weather Forecast
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div class="loading" id="loading">
+        <i class="fas fa-spinner"></i>
+        <h3>Loading weather data...</h3>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error" id="error">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3 id="error-message">Error loading weather data</h3>
+        <p>Please try again or check your location input</p>
+    </div>
+
+    <!-- Weather Display -->
+    <div class="container">
+        <div class="current-weather" id="current-weather">
+            <div class="current-header">
+                <div class="location-info">
+                    <h2 id="current-location">Farm Location</h2>
+                    <p id="current-date">Monday, January 1, 2023</p>
+                </div>
+                <div class="weather-main">
+                    <div class="weather-icon" id="current-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <p id="current-description">Sunny</p>
+                </div>
+            </div>
+            
+            <div class="current-main">
+                <div class="temp-display">
+                    <div class="temp-value" id="current-temp">24°C</div>
+                    <div>
+                        <p>Feels like: <span id="feels-like">25°C</span></p>
+                        <p>Humidity: <span id="humidity">65%</span></p>
+                    </div>
+                </div>
+                
+                <div class="weather-misc">
+                    <div class="sun-times">
+                        <p><i class="fas fa-sun"></i> Sunrise: <span id="sunrise">6:45 AM</span></p>
+                        <p><i class="fas fa-moon"></i> Sunset: <span id="sunset">6:30 PM</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="weather-details">
+                <div class="detail-card">
+                    <i class="fas fa-wind"></i>
+                    <h4>Wind</h4>
+                    <p id="wind-speed">5.2 km/h</p>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-cloud-rain"></i>
+                    <h4>Precipitation</h4>
+                    <p id="precipitation">0 mm</p>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-cloud"></i>
+                    <h4>Cloud Cover</h4>
+                    <p id="clouds">10%</p>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-tint"></i>
+                    <h4>Pressure</h4>
+                    <p id="pressure">1015 hPa</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forecast Section -->
+    <div class="container">
+        <div class="forecast-container">
+            <div class="section-title">
+                <h2>4-Day Weather Forecast</h2>
+                <p>Plan your farming activities with accurate predictions</p>
+            </div>
+            
+            <div class="forecast-cards" id="forecast-cards">
+                <!-- Forecast cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Weather Impact Section -->
+    <div class="container">
+        <div class="impact-section">
+            <h3>Weather Impact on Agriculture</h3>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <h4><i class="fas fa-seedling"></i> Crop Planning</h4>
+                    <p>Use the forecast to plan planting and harvesting schedules based on optimal weather conditions.</p>
+                </div>
+                <div class="impact-card">
+                    <h4><i class="fas fa-tint"></i> Irrigation Management</h4>
+                    <p>Adjust irrigation based on predicted rainfall to conserve water and reduce costs.</p>
+                </div>
+                <div class="impact-card">
+                    <h4><i class="fas fa-bug"></i> Pest Control</h4>
+                    <p>Certain weather conditions increase pest activity. Plan preventive measures accordingly.</p>
+                </div>
+                <div class="impact-card">
+                    <h4><i class="fas fa-wind"></i> Frost Protection</h4>
+                    <p>Prepare for frost events to protect sensitive crops from cold damage.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>AgroNexus</h3>
+                    <p>Transforming agriculture through technology and innovation to empower farmers worldwide.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Weather Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="weather.html">Current Weather</a></li>
+                        <li><a href="weather.html">4-Day Forecast</a></li>
+                        <li><a href="#">Historical Data</a></li>
+                        <li><a href="#">Weather Alerts</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Crop Prediction</a></li>
+                        <li><a href="#">Fertilizer Recommendation</a></li>
+                        <li><a href="#">Marketplace</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Farm Avenue, Agriculture City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@agronexus.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 AgroNexus. All rights reserved. Weather data powered by OpenWeatherMap</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="weather.js"></script>
+</body>
+</html>

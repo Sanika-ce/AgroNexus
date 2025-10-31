@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+       
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .resend {
+            background-color:#4CAF50;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+        
+        .resend:hover {
+            background-color: #e0e0e0;
+        }
+        /* Header Styles */
+        header {
+           background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width:100%;
+            top: 0;
+            z-index: 1000;
+            height: 90px;
+        }
+       
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #2e7d32;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 16px;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #2e7d32;
+            color: #2e7d32;
+        }
+        
+        .btn-outline:hover {
+            background-color: #2e7d32;
+            color: #fff;
+        }
+        
+        .btn-primary {
+            background-color: #2e7d32;
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1b5e20;
+        }
+         /* Main Content */
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+      
+        .auth-illustration {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(27, 94, 32, 0.2)), 
+                        url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            display: none;
+        }
+        
+        .auth-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        .auth-card {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+        }
+      
+        .auth-header {
+            background-color: #2e7d32;
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .auth-header h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .auth-header p {
+            opacity: 0.9;
+        }
+    </style>
+    <!-- Header -->
+    <header>
+        <div class="head">
+            <nav>
+                <!--<div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <span>AgroNexus</span>
+                </div>-->
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" onclick="window.location.href='home.html'">Back to Home</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+</head>
+<body>
+    <div class="container">
+        <h2>OTP Verification</h2>
+        
+        <div class="input-group">
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button id="emailBtn">OTP</button>
+        </div>
+        
+        <div class="input-group">
+            <input type="text" id="otp" placeholder="Enter OTP" required>
+            <div class="button-group">
+                <button id="resendBtn" class="resend">Resend OTP</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // You can add JavaScript functionality here
+        document.getElementById('emailBtn').addEventListener('click', function() {
+            alert('Email verification sent!');
+        });
+        
+        document.getElementById('otpBtn').addEventListener('click', function() {
+            alert('OTP sent to your email!');
+        });
+        
+        document.getElementById('resendBtn').addEventListener('click', function() {
+            alert('OTP resent!');
+        });
+        
+        document.getElementById('verifyBtn').addEventListener('click', function() {
+            alert('OTP verified!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgroNexus - Weather Forecast</title>
+
+  <!-- Icons & Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet"/>
+
+  <!-- Your CSS (ensure correct filename) -->
+  <link rel="stylesheet" href="weather.css"/>
+
+  <style>
+    /* Minimal fallback styles if weather.css is missing */
+    body { font-family: 'Poppins', system-ui, sans-serif; margin:0; background:#f0f9e9; }
+    .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+    .select-group { margin-bottom: 16px; }
+    label { display:block; margin-bottom:6px; font-weight:600; }
+    select { width:100%; padding:10px; border-radius:6px; border:1px solid #c8e6c9; }
+    button { padding:12px 20px; border:none; border-radius:8px; background:#2e7d32; color:#fff; cursor:pointer; font-weight:600; }
+    .hidden { display:none; }
+    .forecast-section { margin-top: 30px; }
+    .card { padding:15px; background:#fff; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05); margin-bottom:15px; }
+  </style>
+</head>
+<body>
+  <!-- Header simplified for brevity -->
+  <header style="background:linear-gradient(to right,#1b5e20,#2e7d32); color:white; padding:15px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+      <div style="font-size:24px; font-weight:700; display:flex; align-items:center; gap:8px;">
+        <i class="fas fa-seedling" style="color:#ffd600;"></i> AgroNexus
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button style="background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); color:white;">Login</button>
+        <button style="background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); color:white;">Sign Up</button>
+      </div>
+    </div>
+    <nav style="margin-top:12px;">
+      <ul style="list-style:none; display:flex; gap:15px; padding:0;">
+        <li><a href="#" style="color:white; text-decoration:none;">Home</a></li>
+        <li><a href="#" style="color:white; text-decoration:none;">About</a></li>
+        <li><a href="#" style="color:white; text-decoration:none;">Services</a></li>
+        <li><a href="#" style="color:white; text-decoration:none; background:rgba(255,255,255,0.2); padding:6px 12px; border-radius:15px;">Weather</a></li>
+        <li><a href="#" style="color:white; text-decoration:none;">Crops</a></li>
+        <li><a href="#" style="color:white; text-decoration:none;">Market</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <div class="container">
+    <section class="card">
+      <h1 style="margin-bottom:8px;">Agriculture Weather Forecast</h1>
+      <p style="margin-bottom:20px;">Get accurate 7-day weather predictions tailored for your farming activities</p>
+
+      <div class="location-selector">
+        <div class="select-group">
+          <label for="state"><i class="fas fa-map-marker-alt"></i> Select State</label>
+          <select id="state">
+            <option value="">-- Choose your state --</option>
+            <option value="maharashtra">Maharashtra</option>
+            <option value="punjab">Punjab</option>
+            <option value="gujarat">Gujarat</option>
+            <option value="tamilnadu">Tamil Nadu</option>
+            <option value="karnataka">Karnataka</option>
+            <option value="uttarpradesh">Uttar Pradesh</option>
+          </select>
+        </div>
+
+        <div class="select-group">
+          <label for="district"><i class="fas fa-map"></i> Select District</label>
+          <select id="district" disabled>
+            <option value="">-- Select district --</option>
+          </select>
+        </div>
+
+        <div class="select-group">
+          <label for="village"><i class="fas fa-village"></i> Select Village</label>
+          <select id="village" disabled>
+            <option value="">-- Select village --</option>
+          </select>
+        </div>
+
+        <button id="getWeatherBtn" disabled><i class="fas fa-cloud-sun"></i> Get Weather Forecast</button>
+        <div id="locationError" style="color:#b00020; margin-top:8px; display:none;"></div>
+      </div>
+    </section>
+
+    <section class="forecast-section card hidden" id="forecastSection">
+      <div class="location-info">
+        <h3>7-Day Weather Forecast for</h3>
+        <p id="selectedLocation">—</p>
+      </div>
+
+      <div id="forecastCards" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:15px; margin-top:20px;">
+        <!-- injected daily forecast cards -->
+      </div>
+
+      <div class="advisory-container" style="margin-top:30px;">
+        <h3><i class="fas fa-seedling"></i> Agricultural Advisory</h3>
+        <p id="advisorySummary">Based on the upcoming weather conditions, here are recommendations for your farming activities</p>
+        <div id="advisoryGrid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:15px; margin-top:10px;">
+          <!-- advisory cards -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer simplified -->
+  <footer style="text-align:center; padding:25px; margin-top:40px; background:#e8f5e9; color:#2e7d32;">
+    <div style="font-size:20px; display:flex; justify-content:center; gap:8px; align-items:center;">
+      <i class="fas fa-seedling"></i> AgroNexus
+    </div>
+    <p style="margin:5px 0;">© 2025 AgroNexus. Empowering farmers with accurate weather forecasts and agricultural advice.</p>
+    <div style="display:flex; justify-content:center; gap:10px; margin-top:8px;">
+      <a href="#"><i class="fab fa-facebook-f" style="background:#4caf50; padding:10px; border-radius:50%; color:white;"></i></a>
+      <a href="#"><i class="fab fa-twitter" style="background:#4caf50; padding:10px; border-radius:50%; color:white;"></i></a>
+      <a href="#"><i class="fab fa-instagram" style="background:#4caf50; padding:10px; border-radius:50%; color:white;"></i></a>
+      <a href="#"><i class="fab fa-youtube" style="background:#4caf50; padding:10px; border-radius:50%; color:white;"></i></a>
+    </div>
+  </footer>
+
+  <script src="weather.js"></script>
+</body>
+</html>

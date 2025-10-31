@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agri-Assist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Agri-Assist</h1>
+            <p>Your multilingual agricultural assistant powered by government data</p>
+        </header>
+
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    Hello! I'm your agricultural assistant. I can help you with information about government schemes, farming practices, irrigation, and agriculture.
+                </div>
+            </div>
+            
+            <div class="input-container">
+                <!-- Make sure these IDs match exactly -->
+                <input type="text" id="userInput" placeholder="Ask about crops, schemes, or farming practices...">
+                <button id="sendButton">Send</button>
+            </div>
+        </div>
+
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <label for="languageSelect">🌐 भाषा / Language: </label>
+            <select id="languageSelect">
+                <option value="english">English</option>
+                <option value="hindi">हिन्दी - Hindi</option>
+                <option value="marathi">मराठी - Marathi</option>
+                <option value="bengali">বাংলা - Bengali</option>
+                <option value="tamil">தமிழ் - Tamil</option>
+                <option value="telugu">తెలుగు - Telugu</option>
+                <option value="kannada">ಕನ್ನಡ - Kannada</option>
+                <option value="gujarati">ગુજરાતી - Gujarati</option>
+                <option value="punjabi">ਪੰਜਾਬੀ - Punjabi</option>
+            </select>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <h3>Multilingual</h3>
+                <p>Ask questions in English, Hindi, or any major Indian language</p>
+            </div>
+            <div class="feature">
+                <h3>Official Data</h3>
+                <p>Answers sourced from government agricultural websites</p>
+            </div>
+            <div class="feature">
+                <h3>Instant Answers</h3>
+                <p>Get accurate information about schemes and practices</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

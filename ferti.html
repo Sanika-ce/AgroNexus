@@ -1,0 +1,372 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgroNexus - Fertilizer Recommendation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-dark: #1b5e20;
+      --primary-light: #4caf50;
+      --secondary: #ffd600;
+      --background: #f0f9e9;
+      --card-bg: #ffffff;
+      --text: #333333;
+      --text-light: #666666;
+      --border: #c8e6c9;
+      --error: #b00020;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--background) 0%, #c8e6c9 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(to right, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 15px 5%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo i {
+      margin-right: 10px;
+      color: var(--secondary);
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .hero {
+      text-align: center;
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border);
+    }
+
+    .hero h1 {
+      color: var(--primary-dark);
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: var(--text-light);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .form-group {
+      text-align: left;
+    }
+
+    label {
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    select:focus, input:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    }
+
+    button {
+      grid-column: span 2;
+      justify-self: center;
+      padding: 15px 40px;
+      background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: 600;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 15px rgba(46, 125, 50, 0.4);
+    }
+
+    .result-card {
+      margin-top: 40px;
+      background: #e8f5e9;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    .result-card h2 {
+      color: var(--primary-dark);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .result-card p {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--primary);
+      margin-top: 50px;
+    }
+
+    footer .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    footer .social-icons a {
+      background: var(--primary-light);
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    footer .social-icons a:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 600px) {
+      button {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="top-bar">
+    <a href="home.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    <div class="logo"><i class="fas fa-seedling"></i> AgroNexus</div>
+  </div>
+</header>
+
+<div class="container"> 
+  <section class="hero">
+    <h1>Fertilizer Recommendation System</h1>
+    <p>Get the best fertilizer suggestion based on your soil and crop conditions.</p>
+
+    <form id="fertilizerForm">
+      <div class="form-group">
+        <label><i class="fas fa-seedling"></i> Crop Type</label>
+        <select id="cropType" required>
+          <option value="">Select Crop</option>
+          <option value="rice">Rice</option>
+          <option value="wheat">Wheat</option>
+          <option value="maize">Maize</option>
+          <option value="cotton">Cotton</option>
+          <option value="sugarcane">Sugarcane</option>
+          <option value="groundnut">Groundnut</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-mountain"></i> Soil Type</label>
+        <select id="soilType" required>
+          <option value="">Select Soil Type</option>
+          <option value="sandy">Sandy</option>
+          <option value="clay">Clay</option>
+          <option value="loamy">Loamy</option>
+          <option value="black">Black</option>
+          <option value="red">Red</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-cloud-rain"></i> Rainfall (mm)</label>
+        <input type="number" id="rainfall" placeholder="Enter rainfall" required />
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-flask"></i> Previously Used Fertilizer</label>
+        <select id="prevFertilizer" required>
+          <option value="">Select Fertilizer</option>
+          <option value="urea">Urea</option>
+          <option value="dap">DAP</option>
+          <option value="mop">MOP</option>
+          <option value="npk">NPK</option>
+          <option value="organic">Organic Compost</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-calendar-alt"></i> Season / Planting Time</label>
+        <select id="season" required>
+          <option value="">Select Season</option>
+          <option value="kharif">Kharif (June - October)</option>
+          <option value="rabi">Rabi (November - April)</option>
+          <option value="zaid">Zaid (Summer)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-seedling"></i> Growth Stage</label>
+        <select id="growthStage" required>
+          <option value="">Select Growth Stage</option>
+          <option value="initial">Initial (Seedling)</option>
+          <option value="vegetative">Vegetative</option>
+          <option value="flowering">Flowering</option>
+          <option value="harvesting">Harvesting</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-leaf"></i> Previous Crop</label>
+        <input type="text" id="previousCrop" placeholder="Enter previous crop" required />
+      </div>
+
+      <button type="submit"><i class="fas fa-leaf"></i> Recommend Fertilizer</button>
+    </form>
+
+    <div class="result-card" id="resultCard">
+      <h2>Recommended Fertilizer</h2>
+      <p id="fertilizerName">—</p>
+      <p id="adviceText"></p>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="logo"><i class="fas fa-seedling"></i> AgroNexus</div>
+  <p>© 2025 AgroNexus. Empowering farmers with smart fertilizer guidance.</p>
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("fertilizerForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const crop = document.getElementById("cropType").value;
+    const soil = document.getElementById("soilType").value;
+    const rain = parseFloat(document.getElementById("rainfall").value);
+    const prevFertilizer = document.getElementById("prevFertilizer").value;
+    const season = document.getElementById("season").value;
+    const growth = document.getElementById("growthStage").value;
+    const prevCrop = document.getElementById("previousCrop").value.toLowerCase();
+
+    let fertilizer = "NPK 10:10:10";
+    let advice = "";
+
+    // Simple rule-based logic
+    if (soil === "black" && crop === "cotton") {
+      fertilizer = "NPK 19:19:19 + Micronutrients";
+      advice = "Black soil supports cotton well. Add micronutrients for better yield.";
+    } else if (soil === "loamy" && crop === "rice" && rain > 150) {
+      fertilizer = "NPK 17:17:17";
+      advice = "Loamy soil and high rainfall favor rice. Use balanced fertilizer.";
+    } else if (prevFertilizer === "urea" && growth === "vegetative") {
+      fertilizer = "Single Super Phosphate (SSP)";
+      advice = "Avoid excess nitrogen. Use SSP for root development.";
+    } else if (season === "rabi" && crop === "wheat") {
+      fertilizer = "NPK 12:32:16";
+      advice = "Phosphorus-rich fertilizer recommended for Rabi wheat.";
+    } else if (prevCrop === "paddy" && crop === "wheat") {
+      fertilizer = "Complex NPK (20:20:0)";
+      advice = "Post-paddy fields need balanced nutrients for wheat.";
+    } else {
+      fertilizer = "Compost + NPK 15:15:15";
+      advice = "Maintain balanced nutrients using organic compost with NPK mix.";
+    }
+
+    document.getElementById("resultCard").style.display = "block";
+    document.getElementById("fertilizerName").innerText = fertilizer;
+    document.getElementById("adviceText").innerText = advice;
+  });
+</script>
+
