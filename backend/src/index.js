@@ -4,6 +4,7 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
+const marketRoutes = require('./routes/market');
 const { Pinecone } = require('@pinecone-database/pinecone');
 // const MaharashtraMarketPrices = require('./market-prices.js');
 // const marketPrices = new MaharashtraMarketPrices();
@@ -15,8 +16,13 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/market', marketRoutes);
+console.log('Marketplace routes registered at /api/market');
+
 // Serve static files from frontend
 app.use('/chatbot', express.static(path.join(__dirname, '../../chatbot')));
+app.use(express.static(path.join(__dirname, '../..')));
+app.use('/images', express.static(path.join(__dirname, '../../image')));
 // app.use(express.static(path.join(__dirname, '../../frontend')));
 // app.use('/src', express.static(path.join(__dirname, '../../frontend/src')));
 
@@ -529,7 +535,58 @@ app.get('/health', (req, res) => {
 
 // Root endpoint - serve the frontend
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../frontend/src/index.html'));
+  res.sendFile(path.join(__dirname, '../../home.html'));    //frontend/src/index.html
+
+});
+
+app.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../home.html'));
+});
+
+// Serve marketplace page
+app.get('/marketplace', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../marketplace.html'));
+});
+
+app.get('/marketplace.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../marketplace.html'));
+});
+
+app.get('/news', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../news.html'));
+});
+
+app.get('/weather', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../weather.html'));
+});
+
+app.get('/signin', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../sign.html'));
+});
+
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../signup.html'));
+});
+
+app.get('/user', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../user.html'));
+});
+
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../about.html'));
+});
+
+app.get('/crop-prediction', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../crop pre.html'));
+});
+
+app.get('/fertilizer', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../ferti.html'));
+});
+
+// Chatbot route (if you have a separate chatbot page)
+app.get('/chatbot-page', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../chatbot/index.html'));
 });
 
 // Start the server

@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroNexus - Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+    <style>
+        /* Enhanced Marketplace Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            padding-top: 100px !important;
+            margin: 0 !important;
+            background: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        header {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            z-index: 1000 !important;
+            background: white !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Main content starts below header */
+        .marketplace-main-content {
+            margin-top: 0;
+            width: 100%;
+        }
+        
+        .marketplace-hero {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 80px 0 60px 0;
+            text-align: center;
+        }
+        
+        .marketplace-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 400px;
+        }
+        
+        .marketplace-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        /* Dashboard Sections */
+        .dashboard-section, .shopping-section, .admin-section {
+            background: white;
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .section-header, .shopping-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-header h2, .shopping-header h2 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        
+        /* Dashboard Stats */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #2ecc71;
+        }
+        
+        .stat-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        /* Shopping Cart */
+        .cart-summary {
+            background: #e8f5e8;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        /* Admin Actions */
+        .admin-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .product-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 3em;
+            color: #2ecc71;
+        }
+        
+        .product-price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2ecc71;
+            margin: 10px 0;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .product-description {
+            color: #555;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+        
+        .product-actions, .admin-actions-product {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 14px;
+            flex: 1;
+        }
+        
+        .btn-primary {
+            background-color: #2e7d32;
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1b5e20;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #2e7d32;
+            color: #2e7d32;
+        }
+        
+        .btn-outline:hover {
+            background-color: #2e7d32;
+            color: #fff;
+        }
+        
+        .btn-danger {
+            background-color: #e53935;
+            color: #fff;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c62828;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.1em;
+            color: #666;
+        }
+        
+        /* Add Product Button - Only for Farmers */
+        .add-product-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: none; /* Hidden by default, shown for farmers */
+        }
+        
+        .add-product-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.6);
+        }
+        
+        .search-filter {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            width: 300px;
+            font-size: 1em;
+        }
+        
+        .filter-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            background: white;
+            cursor: pointer;
+        }
+        
+        /* User Menu Styles */
+        .nav-auth {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .user-greeting {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .user-greeting:hover {
+            background: #e8f5e8;
+            border-color: #2e7d32;
+        }
+        
+        .user-greeting i {
+            color: #2e7d32;
+            font-size: 18px;
+        }
+        
+        .user-greeting span {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            padding: 8px 0;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .user-menu:hover .user-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-item:hover {
+            background: #f8f9fa;
+            color: #2e7d32;
+        }
+        
+        .dropdown-item i {
+            width: 16px;
+            text-align: center;
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background: #e0e0e0;
+            margin: 8px 0;
+        }
+        
+        .logout-btn {
+            color: #e53935 !important;
+        }
+        
+        .logout-btn:hover {
+            background: #ffebee !important;
+        }
+        
+        .user-role-badge {
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .marketplace-stats {
+                gap: 20px;
+            }
+            
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .search-box {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-summary {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Authentication Check -->
+    <script>
+        // Immediate authentication check
+        (function() {
+            const user = JSON.parse(localStorage.getItem('agronexus_user'));
+            
+            if (!user) {
+                // No user logged in - redirect to login
+                window.location.href = 'user.html?redirect=marketplace';
+                return;
+            }
+            
+            // Store user type for later use
+            window.currentUser = user;
+        })();
+    </script>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <span>AgroNexus</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li class="services-menu">
+                        <a href="#" id="services-link">Services <i class="fas fa-caret-down"></i></a>
+                        <ul class="services-dropdown" id="services-dropdown">
+                            <li><a href="/crop-prediction">Crop Prediction</a></li>
+                            <li><a href="/fertilizer">Fertilizer Recommendation</a></li>
+                            <li><a href="/weather">Rainfall & Yield Prediction</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/chatbot">🌟 Agri Assistant</a></li>
+                    <li><a href="/weather">Weather</a></li>
+                    <li><a href="/news">News</a></li>
+                    <li><a href="marketplace.html" style="color: #2ecc71; font-weight: 600;">Shop</a></li>
+                </ul>
+                
+                <!-- Dynamic Auth Section -->
+                <div class="nav-auth" id="navAuth">
+                    <!-- This will be populated by JavaScript -->
+                </div>
+                
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="marketplace-main-content">
+        <!-- Marketplace Hero - Dynamic based on role -->
+        <section class="marketplace-hero" id="marketplaceHero">
+            <div class="container">
+                <h1 id="heroTitle">🌾 AgroNexus Marketplace</h1>
+                <p id="heroSubtitle">Connect directly with farmers and buyers. Fresh produce, fair prices.</p>
+                <div class="marketplace-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-products">0</div>
+                        <div>Products Listed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="active-farmers">0</div>
+                        <div>Active Farmers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div>Direct Trade</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Farmer Dashboard Section (Visible only to farmers) -->
+        <section id="farmerDashboard" class="dashboard-section" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <h2>👨‍🌾 My Farmer Dashboard</h2>
+                    <p>Manage your products and track your sales</p>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="myProductsCount">0</div>
+                            <div class="stat-label">My Products</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <div class="stat-number">₹<span id="totalSales">0</span></div>
+                            <div class="stat-label">Total Sales</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="averageRating">0.0</div>
+                            <div class="stat-label">Avg Rating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Shopping Section (Visible only to customers) -->
+        <section id="customerShopping" class="shopping-section" style="display: none;">
+            <div class="container">
+                <div class="shopping-header">
+                    <h2>🛒 Fresh Farm Products</h2>
+                    <p>Browse and buy directly from local farmers</p>
+                </div>
+                <div class="cart-summary">
+                    <div class="cart-info">
+                        <span id="cartCount">0 items</span> in cart • 
+                        <span id="cartTotal">₹0</span>
+                        <button class="btn btn-primary" onclick="viewCart()">View Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Tools Section (Visible only to admins) -->
+        <section id="adminTools" class="admin-section" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <h2>⚙️ Admin Dashboard</h2>
+                    <p>Manage platform operations and user accounts</p>
+                </div>
+                <div class="admin-actions">
+                    <button class="btn btn-outline" onclick="manageUsers()">👥 Manage Users</button>
+                    <button class="btn btn-outline" onclick="viewReports()">📊 View Reports</button>
+                    <button class="btn btn-outline" onclick="moderateProducts()">🛡️ Moderate Products</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="marketplace-container">
+            <div class="search-filter">
+                <input type="text" class="search-box" placeholder="🔍 Search products..." id="searchInput">
+                <select class="filter-select" id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Grains">Grains</option>
+                    <option value="Spices">Spices</option>
+                    <option value="Dairy">Dairy</option>
+                </select>
+                <select class="filter-select" id="sortFilter">
+                    <option value="newest">Newest First</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                </select>
+            </div>
+            
+            <div id="products-container">
+                <div class="loading">Loading products...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo">
+                        <i class="fas fa-seedling"></i>
+                        <span>AgroNexus</span>
+                    </div>
+                    <p>Transforming agriculture through technology and innovation to empower farmers worldwide.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="/crop-prediction">Services</a></li>
+                        <li><a href="/weather">Weather Forecast</a></li>
+                        <li><a href="/news">News Updates</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="/crop-prediction">Crop Prediction</a></li>
+                        <li><a href="/fertilizer">Fertilizer Recommendation</a></li>
+                        <li><a href="/weather">Rainfall & Yield Prediction</a></li>
+                        <li><a href="/chatbot">AI Chatbot Support</a></li>
+                        <li><a href="marketplace.html">Direct Crop Selling</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Farm Avenue, Agriculture City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@agrotech.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 AgroNexus. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto;">
+        <div style="position: relative; background: white; margin: 50px auto; padding: 30px; width: 90%; max-width: 500px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
+            <h2 style="color: #2ecc71; margin-bottom: 20px; position: sticky; top: 0; background: white; padding-bottom: 10px; border-bottom: 1px solid #eee;">🌱 List Your Product</h2>
+            <button onclick="closeAddProductModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666; z-index: 1;">×</button>
+            
+            <form id="addProductForm" style="margin-top: 20px;">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Product Name *</label>
+                    <input type="text" id="productName" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Category *</label>
+                    <select id="productCategory" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em;">
+                        <option value="">Select Category</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Grains">Grains</option>
+                        <option value="Spices">Spices</option>
+                        <option value="Dairy">Dairy</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                    <div style="flex: 1;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Price (₹ per kg) *</label>
+                        <input type="number" id="productPrice" required step="0.01" min="0" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Quantity *</label>
+                        <input type="number" id="productQuantity" required step="0.01" min="0" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em;">
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Unit *</label>
+                    <select id="productUnit" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em;">
+                        <option value="kg">kg</option>
+                        <option value="quintal">Quintal</option>
+                        <option value="ton">Ton</option>
+                        <option value="piece">Piece</option>
+                        <option value="dozen">Dozen</option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Description</label>
+                    <textarea id="productDescription" rows="3" placeholder="Describe your product (quality, features, etc.)" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em; resize: vertical;"></textarea>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Location *</label>
+                    <input type="text" id="productLocation" required placeholder="e.g., Nashik, Maharashtra" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em;">
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Harvest Date</label>
+                    <input type="date" id="productHarvestDate" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em;">
+                </div>
+                
+                <button type="submit" style="background: #2ecc71; color: white; padding: 15px 30px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 1.1em; font-weight: 600; transition: background 0.3s ease; position: sticky; bottom: 0;">
+                    List Product
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Product Button - Only shown for farmers -->
+    <button class="add-product-btn" onclick="openAddProductModal()" id="addProductBtn">
+        +
+    </button>
+
+    <!-- Role Management JavaScript -->
+    <script>
+        // Sample products data for demonstration
+        const sampleProducts = [
+            {
+                id: '1',
+                name: 'Fresh Tomatoes',
+                category: 'Vegetables',
+                price: 40,
+                quantity: 100,
+                unit: 'kg',
+                description: 'Fresh organic tomatoes from local farms',
+                location: 'Nashik, Maharashtra',
+                sellerName: 'Rajesh Kumar',
+                sellerId: 'farmer1',
+                harvestDate: '2024-01-15'
+            },
+            {
+                id: '2',
+                name: 'Alphonso Mangoes',
+                category: 'Fruits',
+                price: 120,
+                quantity: 50,
+                unit: 'kg',
+                description: 'Premium quality Alphonso mangoes',
+                location: 'Ratnagiri, Maharashtra',
+                sellerName: 'Priya Singh',
+                sellerId: 'farmer2',
+                harvestDate: '2024-02-20'
+            },
+            {
+                id: '3',
+                name: 'Basmati Rice',
+                category: 'Grains',
+                price: 80,
+                quantity: 200,
+                unit: 'kg',
+                description: 'Premium quality basmati rice',
+                location: 'Punjab',
+                sellerName: 'Amit Sharma',
+                sellerId: 'farmer3',
+                harvestDate: '2024-01-10'
+            }
+        ];
+
+        // Role-based marketplace initialization
+        function initializeMarketplace() {
+            const user = JSON.parse(localStorage.getItem('agronexus_user'));
+            
+            if (!user) {
+                window.location.href = 'user.html?redirect=marketplace';
+                return;
+            }
+            
+            // Update UI based on user role
+            updateNavigationForRole(user);
+            showRoleSpecificSections(user.type);
+            updateHeroContent(user.type);
+            toggleAddProductButton(user.type);
+            
+            // Load appropriate data
+            loadMarketplaceData(user);
+        }
+
+        function updateNavigationForRole(user) {
+            const navAuth = document.getElementById('navAuth');
+            const greeting = `Hi, ${user.name.split(' ')[0]}`;
+            
+            // Set role badge with appropriate color
+            const roleConfig = {
+                'farmer': { text: '👨‍🌾 Farmer', color: '#27ae60' },
+                'customer': { text: '🛒 Customer', color: '#3498db' },
+                'admin': { text: '⚙️ Admin', color: '#e74c3c' }
+            };
+            
+            const config = roleConfig[user.type];
+            
+            navAuth.innerHTML = `
+                <div class="user-menu">
+                    <div class="user-greeting">
+                        <i class="fas fa-user-circle"></i>
+                        <span>${greeting}</span>
+                    </div>
+                    <div class="user-dropdown">
+                        <div class="user-role-badge">
+                            <span style="background: ${config.color}; color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 600;">${config.text}</span>
+                        </div>
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-btn" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showRoleSpecificSections(role) {
+            // Hide all role sections first
+            document.getElementById('farmerDashboard').style.display = 'none';
+            document.getElementById('customerShopping').style.display = 'none';
+            document.getElementById('adminTools').style.display = 'none';
+            
+            // Show appropriate section
+            switch(role) {
+                case 'farmer':
+                    document.getElementById('farmerDashboard').style.display = 'block';
+                    break;
+                case 'customer':
+                    document.getElementById('customerShopping').style.display = 'block';
+                    break;
+                case 'admin':
+                    document.getElementById('adminTools').style.display = 'block';
+                    break;
+            }
+        }
+
+        function updateHeroContent(role) {
+            const heroTitle = document.getElementById('heroTitle');
+            const heroSubtitle = document.getElementById('heroSubtitle');
+            
+            const content = {
+                'farmer': {
+                    title: '👨‍🌾 Farmer Marketplace',
+                    subtitle: 'Sell your fresh produce directly to customers'
+                },
+                'customer': {
+                    title: '🛒 Fresh Farm Marketplace',
+                    subtitle: 'Buy directly from local farmers - fresh, authentic, fair prices'
+                },
+                'admin': {
+                    title: '⚙️ Admin Marketplace',
+                    subtitle: 'Manage platform operations and ensure smooth marketplace functioning'
+                }
+            };
+            
+            const config = content[role];
+            heroTitle.textContent = config.title;
+            heroSubtitle.textContent = config.subtitle;
+        }
+
+        function toggleAddProductButton(role) {
+            const addProductBtn = document.getElementById('addProductBtn');
+            // Only show add product button for farmers
+            addProductBtn.style.display = role === 'farmer' ? 'block' : 'none';
+        }
+
+        function loadMarketplaceData(user) {
+            // Update stats
+            document.getElementById('total-products').textContent = sampleProducts.length;
+            document.getElementById('active-farmers').textContent = '3';
+            
+            // Load products with role-specific filtering
+            if (user.type === 'farmer') {
+                loadFarmerProducts(user.id);
+                loadFarmerStats(user.id);
+            } else if (user.type === 'customer') {
+                loadAllProducts();
+                loadCartData();
+            } else if (user.type === 'admin') {
+                loadAllProductsForModeration();
+                loadPlatformStats();
+            }
+        }
+
+        // Product display functions
+        function loadAllProducts() {
+            displayProducts(sampleProducts, 'customer');
+        }
+
+        function loadFarmerProducts(farmerId) {
+            // Filter products to show only farmer's products
+            const myProducts = sampleProducts.filter(product => product.sellerId === farmerId);
+            if (myProducts.length === 0) {
+                // If no products, show sample data for demo
+                displayProducts(sampleProducts, 'farmer');
+            } else {
+                displayProducts(myProducts, 'farmer');
+            }
+            document.getElementById('myProductsCount').textContent = myProducts.length || sampleProducts.length;
+        }
+
+        function loadAllProductsForModeration() {
+            displayProducts(sampleProducts, 'admin');
+        }
+
+        function displayProducts(products, userType) {
+            const container = document.getElementById('products-container');
+            const user = JSON.parse(localStorage.getItem('agronexus_user'));
+            
+            if (products.length === 0) {
+                container.innerHTML = '<div class="loading">No products found. Be the first to list a product!</div>';
+                return;
+            }
+            
+            container.innerHTML = `
+                <div class="products-grid">
+                    ${products.map(product => {
+                        const isMyProduct = userType === 'farmer' && product.sellerId === user.id;
+                        
+                        return `
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-${getProductIcon(product.category)}"></i>
+                                </div>
+                                <h3>${product.name}</h3>
+                                <p class="product-description">${product.description}</p>
+                                <div class="product-meta">
+                                    <span>📍 ${product.location}</span>
+                                    <span>👨‍🌾 ${product.sellerName}</span>
+                                </div>
+                                <div class="product-price">₹${product.price}/${product.unit}</div>
+                                <div class="product-meta">
+                                    <span>Quantity: ${product.quantity} ${product.unit}</span>
+                                    <span>Harvest: ${new Date(product.harvestDate).toLocaleDateString()}</span>
+                                </div>
+                                
+                                ${userType === 'customer' ? `
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary" onclick="addToCart('${product.id}')">
+                                            🛒 Add to Cart
+                                        </button>
+                                    </div>
+                                ` : ''}
+                                
+                                ${userType === 'farmer' && isMyProduct ? `
+                                    <div class="product-actions">
+                                        <button class="btn btn-outline" onclick="editProduct('${product.id}')">
+                                            ✏️ Edit
+                                        </button>
+                                        <button class="btn btn-danger" onclick="deleteProduct('${product.id}')">
+                                            🗑️ Delete
+                                        </button>
+                                    </div>
+                                ` : ''}
+                                
+                                ${userType === 'admin' ? `
+                                    <div class="product-actions">
+                                        <button class="btn btn-outline" onclick="editProduct('${product.id}')">
+                                            ✏️ Edit
+                                        </button>
+                                        <button class="btn btn-danger" onclick="deleteProduct('${product.id}')">
+                                            🗑️ Remove
+                                        </button>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        function getProductIcon(category) {
+            const icons = {
+                'Vegetables': 'carrot',
+                'Fruits': 'apple-alt',
+                'Grains': 'wheat',
+                'Spices': 'mortar-pestle',
+                'Dairy': 'cheese'
+            };
+            return icons[category] || 'shopping-basket';
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('agronexus_user');
+                window.location.href = 'home.html';
+            }
+        }
+
+        // Placeholder functions for marketplace features
+        function loadFarmerStats(farmerId) {
+            // Demo stats
+            document.getElementById('totalSales').textContent = '2,500';
+            document.getElementById('averageRating').textContent = '4.5';
+        }
+
+        function loadCartData() {
+            // Demo cart data
+            document.getElementById('cartCount').textContent = '0 items';
+            document.getElementById('cartTotal').textContent = '₹0';
+        }
+
+        function loadPlatformStats() {
+            // Demo platform stats
+            console.log('Loading platform stats');
+        }
+
+        function addToCart(productId) {
+            alert(`Product ${productId} added to cart!`);
+            // Implement cart functionality here
+        }
+
+        function editProduct(productId) {
+            alert(`Edit product ${productId}`);
+            // Implement edit functionality here
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                alert(`Product ${productId} deleted!`);
+                // Implement delete functionality here
+            }
+        }
+
+        function viewCart() {
+            alert('Shopping cart feature coming soon!');
+        }
+
+        function manageUsers() {
+            alert('User management feature coming soon!');
+        }
+
+        function viewReports() {
+            alert('Reports feature coming soon!');
+        }
+
+        function moderateProducts() {
+            alert('Product moderation feature coming soon!');
+        }
+
+        function openAddProductModal() {
+            document.getElementById('addProductModal').style.display = 'block';
+        }
+
+        function closeAddProductModal() {
+            document.getElementById('addProductModal').style.display = 'none';
+        }
+
+        // Form submission for adding products
+        document.getElementById('addProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Product added successfully!');
+            closeAddProductModal();
+        });
+
+        // Initialize marketplace when page loads
+        document.addEventListener('DOMContentLoaded', initializeMarketplace);
+    </script>
+</body>
+</html>

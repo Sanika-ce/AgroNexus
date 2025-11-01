@@ -18,28 +18,28 @@
                     <span>AgroNexus</span>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                       <li class="services-menu">
-        <a href="#" id="services-link">Services <i class="fas fa-caret-down"></i></a>
-        <!-- Dropdown -->
-        <ul class="services-dropdown" id="services-dropdown">
-            <li><a href="crop pre.html">Crop Prediction</a></li>
-            <li><a href="ferti.html">Fertilizer Recommendation</a></li>
-            <li><a href="weather.html">Rainfall & Yield Prediction</a></li>
-        </ul>
-    </li>
-
-                    <li><a href="http://localhost:3000/chatbot">🌟 Agri Assistant</a></li>
-                   <li><a href="#" id="nav-weather">Weather</a></li>
-                   <li><a href="#" id="nav-news">News</a></li>
-                    <li><a href="#">Shop</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li class="services-menu">
+                        <a href="#" id="services-link">Services <i class="fas fa-caret-down"></i></a>
+                        <!-- Dropdown -->
+                        <ul class="services-dropdown" id="services-dropdown">
+                            <li><a href="/crop-prediction">Crop Prediction</a></li>
+                            <li><a href="/fertilizer">Fertilizer Recommendation</a></li>
+                            <li><a href="/weather">Rainfall & Yield Prediction</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/chatbot">🌟 Agri Assistant</a></li>
+                    <li><a href="/weather">Weather</a></li>
+                    <li><a href="/news">News</a></li>
+                    <li><a href="/marketplace">Shop</a></li>
                 </ul>
-                <div class="auth-buttons">
-                    <button class="btn btn-outline" id="header-login-btn">Login</button>
-                    <button class="btn btn-primary" onclick="window.location.href='sign.html'">Sign Up</button>
-                      
+                
+                <!-- REPLACE THIS ENTIRE SECTION -->
+                <div class="nav-auth" id="navAuth">
+                    <!-- This will be populated by JavaScript based on auth status -->
                 </div>
+                
                 <div class="mobile-toggle">
                     <i class="fas fa-bars"></i>
                 </div>
@@ -70,22 +70,21 @@
                 </div>
                 
                 <!-- About Us -->
-                 <div class="link-block" onclick="window.location.href='about.html'">
-                   <i class="fas fa-users"></i>
-                   <h3>About Us</h3>
-                   <p>Learn about our mission and team</p>
-                   </div>
+                <div class="link-block" onclick="window.location.href='/about'">
+                    <i class="fas fa-users"></i>
+                    <h3>About Us</h3>
+                    <p>Learn about our mission and team</p>
+                </div>
 
-               <!-- Services -->
-<div class="link-block services-block" id="services-block">
-  <i class="fas fa-cogs"></i>
-  <h3>Services</h3>
-  <p id="service-text">Explore our comprehensive agriculture solutions</p>
-</div>
-
+                <!-- Services -->
+                <div class="link-block services-block" id="services-block">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Services</h3>
+                    <p id="service-text">Explore our comprehensive agriculture solutions</p>
+                </div>
                 
                 <!-- Weather Forecast -->
-                <div class="link-block"onclick="window.location.href='weather.html'">
+                <div class="link-block" onclick="window.location.href='/weather'">
                     <i class="fas fa-cloud-sun"></i>
                     <h3>Weather Forecast</h3>
                     <p>Get accurate 4-day weather predictions</p>
@@ -94,24 +93,24 @@
                 </div>
                 
                 <!-- News Updates -->
-                <div class="link-block"onclick="window.location.href='news.html'">
+                <div class="link-block" onclick="window.location.href='/news'">
                     <i class="fas fa-newspaper"></i>
                     <h3>News Updates</h3>
                     <p>Latest agriculture news and insights</p>
                 </div>
 
-                <!-- Login -->
-                <div class="link-block" id="quick-login-btn">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <h3>Login</h3>
-                    <p>Access your account and dashboard</p>
+                <!-- Marketplace -->
+                <div class="link-block" onclick="window.location.href='marketplace.html'">
+                    <i class="fas fa-store"></i>
+                    <h3>Marketplace</h3>
+                    <p>Buy and sell agricultural products</p>
                 </div>
                 
-                <!-- Signup -->
-                <div class="link-block" onclick="window.location.href='sign.html'">
-                    <i class="fas fa-user-plus"></i>
-                    <h3>Sign Up</h3>
-                    <p>Create a new account to get started</p>
+                <!-- Agri Assistant -->
+                <div class="link-block" onclick="window.location.href='/chatbot'">
+                    <i class="fas fa-robot"></i>
+                    <h3>Agri Assistant</h3>
+                    <p>Get AI-powered farming advice</p>
                 </div>
             </div>
         </div>
@@ -133,8 +132,7 @@
                     <div class="service-content">
                         <h3>Crop Prediction</h3>
                         <p>AI-powered recommendations for the best crops based on region, season, and soil data.</p>
-                        <button class="btn btn-outline" onclick="window.location.href='crop pre.html'">Learn More</button>
-
+                        <button class="btn btn-outline" onclick="window.location.href='/crop-prediction'">Learn More</button>
                     </div>
                 </div>
                 
@@ -146,8 +144,7 @@
                     <div class="service-content">
                         <h3>Fertilizer Recommendation</h3>
                         <p>Smart fertilizer suggestions based on soil nutrients (NPK), moisture, and crop type.</p>
-                        <button class="btn btn-outline" onclick="window.location.href='ferti.html'">Learn More</button>
-                    
+                        <button class="btn btn-outline" onclick="window.location.href='/fertilizer'">Learn More</button>
                     </div>
                 </div>
                 
@@ -159,7 +156,7 @@
                     <div class="service-content">
                         <h3>Rainfall & Yield Prediction</h3>
                         <p>Accurate forecasts using historical and regional data to plan your harvest.</p>
-                        <button class="btn btn-outline" onclick="window.location.href='weather.html'">Learn More</button>
+                        <button class="btn btn-outline" onclick="window.location.href='/weather'">Learn More</button>
                     </div>
                 </div>
             </div>
@@ -187,22 +184,22 @@
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Weather Forecast</a></li>
-                        <li><a href="#">News Updates</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/crop-prediction">Services</a></li>
+                        <li><a href="/weather">Weather Forecast</a></li>
+                        <li><a href="/news">News Updates</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Our Services</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Crop Prediction</a></li>
-                        <li><a href="#">Fertilizer Recommendation</a></li>
-                        <li><a href="#">Rainfall & Yield Prediction</a></li>
-                        <li><a href="#">AI Chatbot Support</a></li>
-                        <li><a href="#">Direct Crop Selling</a></li>
+                        <li><a href="/crop-prediction">Crop Prediction</a></li>
+                        <li><a href="/fertilizer">Fertilizer Recommendation</a></li>
+                        <li><a href="/weather">Rainfall & Yield Prediction</a></li>
+                        <li><a href="/chatbot">AI Chatbot Support</a></li>
+                        <li><a href="/marketplace">Direct Crop Selling</a></li>
                     </ul>
                 </div>
                 
@@ -259,12 +256,236 @@
 
     <!-- Chatbot -->
     <div class="floating-chatbot">
-        <a href="http://localhost:3000/chatbot" class="chatbot-icon">
+        <a href="/chatbot" class="chatbot-icon">
             <img src="image/chatbot-icon.png" alt="Chat with Agri Assistant">
             <span class="chat-pulse"></span>
         </a>
         <div class="chat-tooltip">Ask me about farming! 🌾</div>
     </div>
+
+    <script>
+    // Authentication-aware navigation
+    function updateNavigation() {
+        const navAuth = document.getElementById('navAuth');
+        const currentUser = JSON.parse(localStorage.getItem('agronexus_user') || 'null');
+        
+        if (currentUser) {
+            // User is logged in - show user menu and logout
+            navAuth.innerHTML = `
+                <div class="user-menu">
+                    <div class="user-greeting">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Hi, ${currentUser.name.split(' ')[0]}</span>
+                    </div>
+                    <div class="user-dropdown">
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="marketplace.html" class="dropdown-item">
+                            <i class="fas fa-store"></i> Marketplace
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-btn" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            `;
+        } else {
+            // User is not logged in - show login/signup buttons
+            navAuth.innerHTML = `
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" onclick="window.location.href='user.html'">Login</button>
+                    <button class="btn btn-primary" onclick="window.location.href='sign.html'">Sign Up</button>
+                </div>
+            `;
+        }
+    }
+
+    // Logout function
+    function logout() {
+        if (confirm('Are you sure you want to logout?')) {
+            localStorage.removeItem('agronexus_user');
+            updateNavigation();
+            
+            // Show logout success message
+            showMessage('You have been logged out successfully!', 'success');
+            
+            // Redirect to home after a delay
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1500);
+        }
+    }
+
+    // Show message function
+    function showMessage(message, type) {
+        // Remove existing messages
+        const existingMessage = document.querySelector('.global-message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+        
+        // Create message element
+        const messageEl = document.createElement('div');
+        messageEl.className = `global-message ${type}`;
+        messageEl.style.cssText = `
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-align: center;
+            background-color: ${type === 'success' ? '#e8f5e8' : '#ffebee'};
+            color: ${type === 'success' ? '#2e7d32' : '#e53935'};
+            border: 1px solid ${type === 'success' ? '#c8e6c9' : '#ffcdd2'};
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: slideDown 0.3s ease;
+        `;
+        messageEl.textContent = message;
+        
+        document.body.appendChild(messageEl);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (messageEl.parentNode) {
+                messageEl.remove();
+            }
+        }, 5000);
+    }
+
+    // Check authentication status when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        updateNavigation();
+        
+        // Check if user just logged in
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('login') && urlParams.get('login') === 'success') {
+            showMessage('Login successful! Welcome back.', 'success');
+            // Clean URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    });
+
+    // Add this CSS for the user menu (add to your home page styles)
+    const userMenuStyles = `
+    <style>
+    .user-menu {
+        position: relative;
+        display: inline-block;
+    }
+
+    .user-greeting {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background: #f8f9fa;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid #e0e0e0;
+    }
+
+    .user-greeting:hover {
+        background: #e8f5e8;
+        border-color: #2e7d32;
+    }
+
+    .user-greeting i {
+        color: #2e7d32;
+        font-size: 18px;
+    }
+
+    .user-greeting span {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .user-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        padding: 8px 0;
+        min-width: 180px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .user-menu:hover .user-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        color: #333;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+        background: #f8f9fa;
+        color: #2e7d32;
+    }
+
+    .dropdown-item i {
+        width: 16px;
+        text-align: center;
+    }
+
+    .dropdown-divider {
+        height: 1px;
+        background: #e0e0e0;
+        margin: 8px 0;
+    }
+
+    .logout-btn {
+        color: #e53935 !important;
+    }
+
+    .logout-btn:hover {
+        background: #ffebee !important;
+    }
+
+    .auth-buttons {
+        display: flex;
+        gap: 12px;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -20px);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+    }
+
+    .global-message {
+        animation: slideDown 0.3s ease;
+    }
+    </style>
+    `;
+
+    // Inject the styles
+    document.head.insertAdjacentHTML('beforeend', userMenuStyles);
+    </script>
     
 </body>
 </html>

@@ -1,0 +1,12 @@
+
+## Step 4: Commit the README and Marketplace files
+
+```bash
+# Add the new files
+git add README.md marketplace.html marketplace.js
+
+# Commit the changes
+git commit -m "Add project README and basic marketplace frontend"
+
+# Push to GitHub (if you created remote repo)
+git push origin main
