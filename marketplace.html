@@ -153,7 +153,7 @@
             gap: 25px;
             margin-top: 30px;
         }
-        
+
         .product-card {
             border: 1px solid #e0e0e0;
             border-radius: 12px;
@@ -162,33 +162,72 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
+            overflow: hidden; /* This keeps everything inside */
         }
-        
+
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 15px rgba(0,0,0,0.15);
         }
-        
+
         .product-image {
+            position: relative;
             width: 100%;
             height: 200px;
             background: #f8f9fa;
             border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden; /* This keeps image inside */
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 15px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-category-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(46, 125, 50, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 600;
+            text-transform: uppercase;
+            z-index: 2; /* Ensure it stays above the image */
+        }
+
+        .product-icon-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
             font-size: 3em;
             color: #2ecc71;
+            background: #f8f9fa;
+            border-radius: 8px;
         }
-        
+
         .product-price {
             font-size: 1.3em;
             font-weight: bold;
             color: #2ecc71;
             margin: 10px 0;
         }
-        
+
         .product-meta {
             display: flex;
             justify-content: space-between;
@@ -196,13 +235,14 @@
             font-size: 0.9em;
             color: #666;
         }
-        
+
         .product-description {
             color: #555;
             margin: 10px 0;
             line-height: 1.4;
+            min-height: 40px;
         }
-        
+
         .product-actions, .admin-actions-product {
             display: flex;
             gap: 10px;
@@ -247,6 +287,15 @@
         
         .btn-danger:hover {
             background-color: #c62828;
+        }
+        
+        .btn-warning {
+            background-color: #ff9800;
+            color: #fff;
+        }
+        
+        .btn-warning:hover {
+            background-color: #f57c00;
         }
         
         .loading {
@@ -403,6 +452,249 @@
             font-size: 12px;
             font-weight: 600;
         }
+
+        /* Farmer Navigation */
+        .farmer-nav-item {
+            background: #e8f5e8;
+            border-radius: 20px;
+            padding: 8px 16px;
+            margin-left: 10px;
+        }
+
+        .farmer-nav-item a {
+            color: #2e7d32 !important;
+            font-weight: 600;
+        }
+
+        /* Shopping Cart Modal */
+        .cart-modal, .checkout-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .cart-modal-content, .checkout-modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-items {
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background: #f8f9fa;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-btn:hover {
+            background: #e9ecef;
+        }
+
+        .cart-item-quantity {
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .cart-total {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: right;
+            margin: 20px 0;
+            padding-top: 20px;
+            border-top: 2px solid #2e7d32;
+        }
+
+        .checkout-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .checkout-step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+
+        .step-active .step-number {
+            background: #2e7d32;
+            color: white;
+        }
+
+        .step-completed .step-number {
+            background: #4caf50;
+            color: white;
+        }
+
+        .checkout-form {
+            margin: 20px 0;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group-checkout {
+            flex: 1;
+        }
+
+        .form-group-checkout label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #444;
+        }
+
+        .form-group-checkout input, .form-group-checkout select, .form-group-checkout textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .order-total {
+            font-size: 1.2em;
+            font-weight: bold;
+            border-top: 2px solid #2e7d32;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .order-confirmation {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .confirmation-icon {
+            font-size: 4em;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+        /* Order History */
+        .orders-section {
+            margin-top: 40px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #2e7d32;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-items {
+            margin: 10px 0;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        .order-status {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-confirmed { background: #d1ecf1; color: #0c5460; }
+        .status-shipped { background: #d4edda; color: #155724; }
+        .status-delivered { background: #e8f5e8; color: #2e7d32; }
+        .status-cancelled { background: #f8d7da; color: #721c24; }
         
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -432,6 +724,21 @@
                 flex-direction: column;
                 gap: 10px;
                 text-align: center;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .cart-item-controls {
+                width: 100%;
+                justify-content: space-between;
             }
         }
     </style>
@@ -477,6 +784,11 @@
                     <li><a href="/weather">Weather</a></li>
                     <li><a href="/news">News</a></li>
                     <li><a href="marketplace.html" style="color: #2ecc71; font-weight: 600;">Shop</a></li>
+                    
+                    <!-- Farmer-specific navigation item -->
+                    <li id="farmerNavItem" style="display: none;" class="farmer-nav-item">
+                        <a href="#my-products">📦 My Products</a>
+                    </li>
                 </ul>
                 
                 <!-- Dynamic Auth Section -->
@@ -544,6 +856,14 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- My Products Section for Farmers -->
+                <div id="myProductsSection" style="margin-top: 40px;">
+                    <h3 style="color: #2e7d32; margin-bottom: 20px; border-bottom: 2px solid #e8f5e8; padding-bottom: 10px;">📦 My Listed Products</h3>
+                    <div id="myProductsContainer">
+                        <!-- My products will be loaded here -->
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -558,7 +878,16 @@
                     <div class="cart-info">
                         <span id="cartCount">0 items</span> in cart • 
                         <span id="cartTotal">₹0</span>
-                        <button class="btn btn-primary" onclick="viewCart()">View Cart</button>
+                        <button class="btn btn-primary" onclick="openCart()">View Cart</button>
+                        <button class="btn btn-outline" onclick="viewOrderHistory()" id="orderHistoryBtn">Order History</button>
+                    </div>
+                </div>
+
+                <!-- Order History Section -->
+                <div id="orderHistorySection" class="orders-section" style="display: none;">
+                    <h3 style="color: #2e7d32; margin-bottom: 20px;">📋 My Order History</h3>
+                    <div id="ordersContainer">
+                        <!-- Orders will be loaded here -->
                     </div>
                 </div>
             </div>
@@ -657,6 +986,198 @@
         </div>
     </footer>
 
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-modal-content">
+            <h2 style="color: #2e7d32; margin-bottom: 20px;">🛒 Your Shopping Cart</h2>
+            <button onclick="closeCart()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">×</button>
+            
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be loaded here -->
+            </div>
+            
+            <div class="cart-total" id="cartTotalModal">
+                Total: ₹0
+            </div>
+            
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-outline" style="flex: 1;" onclick="closeCart()">
+                    Continue Shopping
+                </button>
+                <button class="btn btn-primary" style="flex: 1;" onclick="startCheckout()" id="checkoutBtn">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="checkout-modal">
+        <div class="checkout-modal-content">
+            <h2 style="color: #2e7d32; margin-bottom: 20px;">💳 Checkout</h2>
+            <button onclick="closeCheckout()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">×</button>
+            
+            <div class="checkout-steps" id="checkoutSteps">
+                <div class="checkout-step step-active" id="step1">
+                    <div class="step-number">1</div>
+                    <div>Shipping</div>
+                </div>
+                <div class="checkout-step" id="step2">
+                    <div class="step-number">2</div>
+                    <div>Payment</div>
+                </div>
+                <div class="checkout-step" id="step3">
+                    <div class="step-number">3</div>
+                    <div>Confirm</div>
+                </div>
+            </div>
+
+            <!-- Step 1: Shipping Information -->
+            <div id="checkoutStep1" class="checkout-form">
+                <h3 style="margin-bottom: 20px;">🚚 Shipping Information</h3>
+                <form id="shippingForm">
+                    <div class="form-row">
+                        <div class="form-group-checkout">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" required value="John Doe">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group-checkout">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" required value="john@example.com">
+                        </div>
+                        <div class="form-group-checkout">
+                            <label for="phone">Phone *</label>
+                            <input type="tel" id="phone" required value="+91 9876543210">
+                        </div>
+                    </div>
+                    <div class="form-group-checkout">
+                        <label for="address">Address *</label>
+                        <textarea id="address" rows="3" required>123 Main Street, Mumbai, Maharashtra 400001</textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group-checkout">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" required value="Mumbai">
+                        </div>
+                        <div class="form-group-checkout">
+                            <label for="state">State *</label>
+                            <input type="text" id="state" required value="Maharashtra">
+                        </div>
+                        <div class="form-group-checkout">
+                            <label for="pincode">PIN Code *</label>
+                            <input type="text" id="pincode" required value="400001">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="nextStep(2)">
+                        Continue to Payment
+                    </button>
+                </form>
+            </div>
+
+            <!-- Step 2: Payment Information -->
+            <div id="checkoutStep2" class="checkout-form" style="display: none;">
+                <h3 style="margin-bottom: 20px;">💳 Payment Method</h3>
+                <div class="form-group-checkout">
+                    <label>
+                        <input type="radio" name="paymentMethod" value="card" checked> 
+                        Credit/Debit Card
+                    </label>
+                </div>
+                <div class="form-group-checkout">
+                    <label>
+                        <input type="radio" name="paymentMethod" value="upi"> 
+                        UPI Payment
+                    </label>
+                </div>
+                <div class="form-group-checkout">
+                    <label>
+                        <input type="radio" name="paymentMethod" value="cod"> 
+                        Cash on Delivery
+                    </label>
+                </div>
+
+                <div id="cardDetails" style="margin-top: 20px;">
+                    <div class="form-row">
+                        <div class="form-group-checkout">
+                            <label for="cardNumber">Card Number *</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" value="4111111111111111">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group-checkout">
+                            <label for="expiry">Expiry Date *</label>
+                            <input type="text" id="expiry" placeholder="MM/YY" value="12/25">
+                        </div>
+                        <div class="form-group-checkout">
+                            <label for="cvv">CVV *</label>
+                            <input type="text" id="cvv" placeholder="123" value="123">
+                        </div>
+                    </div>
+                    <div class="form-group-checkout">
+                        <label for="cardName">Name on Card *</label>
+                        <input type="text" id="cardName" value="John Doe">
+                    </div>
+                </div>
+
+                <div class="order-summary">
+                    <h4>Order Summary</h4>
+                    <div id="checkoutSummary">
+                        <!-- Order summary will be loaded here -->
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn-outline" style="flex: 1;" onclick="prevStep(1)">
+                        Back
+                    </button>
+                    <button class="btn btn-primary" style="flex: 1;" onclick="nextStep(3)">
+                        Review Order
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Order Confirmation -->
+            <div id="checkoutStep3" class="checkout-form" style="display: none;">
+                <h3 style="margin-bottom: 20px;">✅ Order Confirmation</h3>
+                <div class="order-summary">
+                    <h4>Order Details</h4>
+                    <div id="orderConfirmationDetails">
+                        <!-- Order confirmation details will be loaded here -->
+                    </div>
+                </div>
+                <div class="form-group-checkout" style="margin: 20px 0;">
+                    <label>
+                        <input type="checkbox" id="termsAgree" checked>
+                        I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-outline" style="flex: 1;" onclick="prevStep(2)">
+                        Back
+                    </button>
+                    <button class="btn btn-primary" style="flex: 1;" onclick="placeOrder()">
+                        Place Order
+                    </button>
+                </div>
+            </div>
+
+            <!-- Order Success -->
+            <div id="orderSuccess" class="order-confirmation" style="display: none;">
+                <div class="confirmation-icon">✅</div>
+                <h3 style="color: #2e7d32; margin-bottom: 10px;">Order Placed Successfully!</h3>
+                <p style="margin-bottom: 20px; color: #666;">Thank you for your purchase. Your order has been confirmed.</p>
+                <div id="orderSuccessDetails" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                    <!-- Order success details will be loaded here -->
+                </div>
+                <button class="btn btn-primary" onclick="closeCheckoutSuccess()">
+                    Continue Shopping
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Add Product Modal -->
     <div id="addProductModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto;">
         <div style="position: relative; background: white; margin: 50px auto; padding: 30px; width: 90%; max-width: 500px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
@@ -732,7 +1253,7 @@
     </button>
 
     <!-- Role Management JavaScript -->
-    <script>
+        <script>
         // Sample products data for demonstration
         const sampleProducts = [
             {
@@ -746,7 +1267,8 @@
                 location: 'Nashik, Maharashtra',
                 sellerName: 'Rajesh Kumar',
                 sellerId: 'farmer1',
-                harvestDate: '2024-01-15'
+                harvestDate: '2024-01-15',
+                image: '/image/tomato.jpeg'
             },
             {
                 id: '2',
@@ -759,7 +1281,8 @@
                 location: 'Ratnagiri, Maharashtra',
                 sellerName: 'Priya Singh',
                 sellerId: 'farmer2',
-                harvestDate: '2024-02-20'
+                harvestDate: '2024-02-20',
+                image: '/image/mango.jpg'
             },
             {
                 id: '3',
@@ -772,9 +1295,15 @@
                 location: 'Punjab',
                 sellerName: 'Amit Sharma',
                 sellerId: 'farmer3',
-                harvestDate: '2024-01-10'
+                harvestDate: '2024-01-10',
+                image: '/image/rice.jpeg'
             }
         ];
+
+        // Shopping cart and orders data
+        let shoppingCart = JSON.parse(localStorage.getItem('agronexus_cart')) || [];
+        let orders = JSON.parse(localStorage.getItem('agronexus_orders')) || [];
+        let currentCheckoutStep = 1;
 
         // Role-based marketplace initialization
         function initializeMarketplace() {
@@ -785,16 +1314,23 @@
                 return;
             }
             
+            console.log('🔄 Initializing marketplace for user:', user);
+            
             // Update UI based on user role
             updateNavigationForRole(user);
             showRoleSpecificSections(user.type);
             updateHeroContent(user.type);
             toggleAddProductButton(user.type);
+            toggleFarmerNavItem(user.type);
             
             // Load appropriate data
             loadMarketplaceData(user);
+            
+            // Update cart display
+            updateCartDisplay();
         }
 
+        // NAVIGATION AND ROLE FUNCTIONS
         function updateNavigationForRole(user) {
             const navAuth = document.getElementById('navAuth');
             const greeting = `Hi, ${user.name.split(' ')[0]}`;
@@ -831,6 +1367,8 @@
         }
 
         function showRoleSpecificSections(role) {
+            console.log('👤 Showing sections for role:', role);
+            
             // Hide all role sections first
             document.getElementById('farmerDashboard').style.display = 'none';
             document.getElementById('customerShopping').style.display = 'none';
@@ -864,8 +1402,8 @@
                     subtitle: 'Buy directly from local farmers - fresh, authentic, fair prices'
                 },
                 'admin': {
-                    title: '⚙️ Admin Marketplace',
-                    subtitle: 'Manage platform operations and ensure smooth marketplace functioning'
+                    title: '⚙️ Admin Dashboard',
+                    subtitle: 'Manage platform operations and monitor marketplace activity'
                 }
             };
             
@@ -880,7 +1418,15 @@
             addProductBtn.style.display = role === 'farmer' ? 'block' : 'none';
         }
 
+        function toggleFarmerNavItem(role) {
+            const farmerNavItem = document.getElementById('farmerNavItem');
+            // Only show "My Products" in navigation for farmers
+            farmerNavItem.style.display = role === 'farmer' ? 'block' : 'none';
+        }
+
         function loadMarketplaceData(user) {
+            console.log('📊 Loading data for user type:', user.type);
+            
             // Update stats
             document.getElementById('total-products').textContent = sampleProducts.length;
             document.getElementById('active-farmers').textContent = '3';
@@ -893,12 +1439,11 @@
                 loadAllProducts();
                 loadCartData();
             } else if (user.type === 'admin') {
-                loadAllProductsForModeration();
-                loadPlatformStats();
+                loadAdminDashboard();
             }
         }
 
-        // Product display functions
+        // PRODUCT DISPLAY FUNCTIONS
         function loadAllProducts() {
             displayProducts(sampleProducts, 'customer');
         }
@@ -906,17 +1451,60 @@
         function loadFarmerProducts(farmerId) {
             // Filter products to show only farmer's products
             const myProducts = sampleProducts.filter(product => product.sellerId === farmerId);
-            if (myProducts.length === 0) {
-                // If no products, show sample data for demo
-                displayProducts(sampleProducts, 'farmer');
-            } else {
-                displayProducts(myProducts, 'farmer');
-            }
-            document.getElementById('myProductsCount').textContent = myProducts.length || sampleProducts.length;
+            document.getElementById('myProductsCount').textContent = myProducts.length;
+            
+            // Display all products in main section
+            displayProducts(sampleProducts, 'farmer');
+            
+            // Display only farmer's products in "My Products" section
+            displayMyProducts(myProducts);
         }
 
-        function loadAllProductsForModeration() {
-            displayProducts(sampleProducts, 'admin');
+        function displayMyProducts(products) {
+            const container = document.getElementById('myProductsContainer');
+            
+            if (products.length === 0) {
+                container.innerHTML = '<div class="loading">You haven\'t listed any products yet. Click the + button to add your first product!</div>';
+                return;
+            }
+            
+            container.innerHTML = `
+                <div class="products-grid">
+                    ${products.map(product => `
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="${product.image}" alt="${product.name}" 
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                                <div class="product-icon-fallback" style="display: none; width: 100%; height: 100%; align-items: center; justify-content: center; font-size: 3em; color: #2ecc71;">
+                                    <i class="fas fa-${getProductIcon(product.category)}"></i>
+                                </div>
+                                <div class="product-category-badge">${product.category}</div>
+                            </div>
+                            <h3>${product.name}</h3>
+                            <p class="product-description">${product.description}</p>
+                            <div class="product-meta">
+                                <span>📍 ${product.location}</span>
+                                <span>👨‍🌾 ${product.sellerName}</span>
+                            </div>
+                            <div class="product-price">₹${product.price}/${product.unit}</div>
+                            <div class="product-meta">
+                                <span>Stock: ${product.quantity} ${product.unit}</span>
+                                <span>Harvest: ${new Date(product.harvestDate).toLocaleDateString()}</span>
+                            </div>
+                            
+                            <div class="product-actions">
+                                <button class="btn btn-outline" onclick="editProduct('${product.id}')">
+                                    ✏️ Edit
+                                </button>
+                                <button class="btn btn-danger" onclick="deleteProduct('${product.id}')">
+                                    🗑️ Delete
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
         }
 
         function displayProducts(products, userType) {
@@ -924,7 +1512,7 @@
             const user = JSON.parse(localStorage.getItem('agronexus_user'));
             
             if (products.length === 0) {
-                container.innerHTML = '<div class="loading">No products found. Be the first to list a product!</div>';
+                container.innerHTML = '<div class="loading">No products found.</div>';
                 return;
             }
             
@@ -936,7 +1524,13 @@
                         return `
                             <div class="product-card">
                                 <div class="product-image">
-                                    <i class="fas fa-${getProductIcon(product.category)}"></i>
+                                    <img src="${product.image}" alt="${product.name}" 
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                                    <div class="product-icon-fallback" style="display: none; width: 100%; height: 100%; align-items: center; justify-content: center; font-size: 3em; color: #2ecc71;">
+                                        <i class="fas fa-${getProductIcon(product.category)}"></i>
+                                    </div>
+                                    <div class="product-category-badge">${product.category}</div>
                                 </div>
                                 <h3>${product.name}</h3>
                                 <p class="product-description">${product.description}</p>
@@ -946,7 +1540,7 @@
                                 </div>
                                 <div class="product-price">₹${product.price}/${product.unit}</div>
                                 <div class="product-meta">
-                                    <span>Quantity: ${product.quantity} ${product.unit}</span>
+                                    <span>Stock: ${product.quantity} ${product.unit}</span>
                                     <span>Harvest: ${new Date(product.harvestDate).toLocaleDateString()}</span>
                                 </div>
                                 
@@ -971,10 +1565,13 @@
                                 
                                 ${userType === 'admin' ? `
                                     <div class="product-actions">
-                                        <button class="btn btn-outline" onclick="editProduct('${product.id}')">
+                                        <button class="btn btn-outline" onclick="adminEditProduct('${product.id}')">
                                             ✏️ Edit
                                         </button>
-                                        <button class="btn btn-danger" onclick="deleteProduct('${product.id}')">
+                                        <button class="btn btn-warning" onclick="flagProduct('${product.id}')">
+                                            🚩 Flag
+                                        </button>
+                                        <button class="btn btn-danger" onclick="adminDeleteProduct('${product.id}')">
                                             🗑️ Remove
                                         </button>
                                     </div>
@@ -997,7 +1594,451 @@
             return icons[category] || 'shopping-basket';
         }
 
-        // Logout function
+        // ADMIN DASHBOARD FUNCTIONS
+        function loadAdminDashboard() {
+            console.log('👨‍💼 Loading admin dashboard');
+            
+            // Load admin-specific data
+            loadPlatformStats();
+            loadAllProductsForModeration();
+            loadUserManagementData();
+        }
+
+        function loadPlatformStats() {
+            // Simulate platform statistics
+            const platformStats = {
+                totalUsers: 47,
+                totalFarmers: 15,
+                totalCustomers: 32,
+                totalProducts: sampleProducts.length,
+                totalRevenue: 125000,
+                activeToday: 23
+            };
+            
+            // Update admin dashboard with stats
+            const adminToolsSection = document.getElementById('adminTools');
+            adminToolsSection.innerHTML += `
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <div class="stat-number">${platformStats.totalUsers}</div>
+                            <div class="stat-label">Total Users</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👨‍🌾</div>
+                        <div class="stat-info">
+                            <div class="stat-number">${platformStats.totalFarmers}</div>
+                            <div class="stat-label">Farmers</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🛒</div>
+                        <div class="stat-info">
+                            <div class="stat-number">${platformStats.totalCustomers}</div>
+                            <div class="stat-label">Customers</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <div class="stat-number">₹${platformStats.totalRevenue}</div>
+                            <div class="stat-label">Revenue</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="color: #2e7d32; margin-bottom: 20px;">🛡️ Product Moderation</h3>
+                    <p>Review and manage all products listed on the platform.</p>
+                </div>
+            `;
+        }
+
+        function loadAllProductsForModeration() {
+            displayProducts(sampleProducts, 'admin');
+        }
+
+        function loadUserManagementData() {
+            // Simulate user data
+            const users = [
+                { id: 1, name: 'Rajesh Kumar', type: 'farmer', email: 'rajesh@example.com', status: 'active', joinDate: '2024-01-15' },
+                { id: 2, name: 'Priya Singh', type: 'farmer', email: 'priya@example.com', status: 'active', joinDate: '2024-01-20' },
+                { id: 3, name: 'Amit Sharma', type: 'customer', email: 'amit@example.com', status: 'active', joinDate: '2024-02-01' },
+                { id: 4, name: 'Admin User', type: 'admin', email: 'admin@agronexus.com', status: 'active', joinDate: '2024-01-01' }
+            ];
+            
+            console.log('👥 Loaded users for admin:', users);
+        }
+
+        // ENHANCED SHOPPING CART FUNCTIONS
+        function addToCart(productId) {
+            const product = sampleProducts.find(p => p.id === productId);
+            if (product) {
+                const existingItem = shoppingCart.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    if (existingItem.quantity < existingItem.cartQuantity + 1) {
+                        alert(`Only ${existingItem.quantity} ${existingItem.unit} available in stock!`);
+                        return;
+                    }
+                    existingItem.cartQuantity += 1;
+                } else {
+                    if (product.quantity < 1) {
+                        alert('Product out of stock!');
+                        return;
+                    }
+                    shoppingCart.push({
+                        ...product,
+                        cartQuantity: 1
+                    });
+                }
+                
+                saveCartToStorage();
+                updateCartDisplay();
+                showMessage(`Added ${product.name} to cart!`, 'success');
+            }
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotalModal');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotalSummary = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            if (shoppingCart.length === 0) {
+                cartItems.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">Your cart is empty</div>';
+                cartTotal.textContent = 'Total: ₹0';
+                cartCount.textContent = '0 items';
+                cartTotalSummary.textContent = '₹0';
+                checkoutBtn.disabled = true;
+                checkoutBtn.innerHTML = 'Cart is Empty';
+                return;
+            }
+            
+            let total = 0;
+            cartItems.innerHTML = shoppingCart.map(item => {
+                const itemTotal = item.price * item.cartQuantity;
+                total += itemTotal;
+                
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <strong>${item.name}</strong>
+                            <div>₹${item.price}/${item.unit}</div>
+                            <div style="font-size: 0.8em; color: #666;">Seller: ${item.sellerName}</div>
+                        </div>
+                        <div class="cart-item-controls">
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                                <span class="cart-item-quantity">${item.cartQuantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                            </div>
+                            <div style="text-align: right; min-width: 80px;">
+                                <strong>₹${itemTotal}</strong>
+                                <button onclick="removeFromCart('${item.id}')" style="background: none; border: none; color: #e53935; cursor: pointer; margin-left: 10px;">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            cartTotal.textContent = `Total: ₹${total}`;
+            cartCount.textContent = `${shoppingCart.reduce((sum, item) => sum + item.cartQuantity, 0)} items`;
+            cartTotalSummary.textContent = `₹${total}`;
+            checkoutBtn.disabled = false;
+            checkoutBtn.innerHTML = 'Proceed to Checkout';
+        }
+
+        function updateQuantity(productId, change) {
+            const item = shoppingCart.find(item => item.id === productId);
+            if (item) {
+                const newQuantity = item.cartQuantity + change;
+                
+                if (newQuantity < 1) {
+                    removeFromCart(productId);
+                    return;
+                }
+                
+                if (newQuantity > item.quantity) {
+                    alert(`Only ${item.quantity} ${item.unit} available in stock!`);
+                    return;
+                }
+                
+                item.cartQuantity = newQuantity;
+                saveCartToStorage();
+                updateCartDisplay();
+            }
+        }
+
+        function removeFromCart(productId) {
+            shoppingCart = shoppingCart.filter(item => item.id !== productId);
+            saveCartToStorage();
+            updateCartDisplay();
+            showMessage('Item removed from cart', 'success');
+        }
+
+        function saveCartToStorage() {
+            localStorage.setItem('agronexus_cart', JSON.stringify(shoppingCart));
+        }
+
+        function loadCartData() {
+            updateCartDisplay();
+        }
+
+        // CART MODAL FUNCTIONS
+        function openCart() {
+            updateCartDisplay();
+            document.getElementById('cartModal').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        // CHECKOUT FUNCTIONS
+        function startCheckout() {
+            if (shoppingCart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            currentCheckoutStep = 1;
+            updateCheckoutSteps();
+            loadCheckoutSummary();
+            document.getElementById('checkoutModal').style.display = 'block';
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').style.display = 'none';
+            resetCheckout();
+        }
+
+        function nextStep(step) {
+            if (step === 2 && !validateShippingForm()) {
+                return;
+            }
+            
+            currentCheckoutStep = step;
+            updateCheckoutSteps();
+        }
+
+        function prevStep(step) {
+            currentCheckoutStep = step;
+            updateCheckoutSteps();
+        }
+
+        function updateCheckoutSteps() {
+            // Hide all steps
+            document.getElementById('checkoutStep1').style.display = 'none';
+            document.getElementById('checkoutStep2').style.display = 'none';
+            document.getElementById('checkoutStep3').style.display = 'none';
+            document.getElementById('orderSuccess').style.display = 'none';
+            
+            // Show current step
+            document.getElementById(`checkoutStep${currentCheckoutStep}`).style.display = 'block';
+            
+            // Update step indicators
+            document.querySelectorAll('.checkout-step').forEach((step, index) => {
+                step.classList.remove('step-active', 'step-completed');
+                if (index + 1 === currentCheckoutStep) {
+                    step.classList.add('step-active');
+                } else if (index + 1 < currentCheckoutStep) {
+                    step.classList.add('step-completed');
+                }
+            });
+        }
+
+        function validateShippingForm() {
+            const requiredFields = ['fullName', 'email', 'phone', 'address', 'city', 'state', 'pincode'];
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                const element = document.getElementById(field);
+                if (!element.value.trim()) {
+                    element.style.borderColor = '#e53935';
+                    isValid = false;
+                } else {
+                    element.style.borderColor = '#ddd';
+                }
+            });
+            
+            if (!isValid) {
+                alert('Please fill in all required fields marked with *');
+            }
+            
+            return isValid;
+        }
+
+        function loadCheckoutSummary() {
+            const subtotal = shoppingCart.reduce((sum, item) => sum + (item.price * item.cartQuantity), 0);
+            const shipping = subtotal > 500 ? 0 : 40;
+            const tax = subtotal * 0.05; // 5% tax
+            const total = subtotal + shipping + tax;
+            
+            const summaryHTML = `
+                <div class="order-summary-item">
+                    <span>Subtotal:</span>
+                    <span>₹${subtotal}</span>
+                </div>
+                <div class="order-summary-item">
+                    <span>Shipping:</span>
+                    <span>${shipping === 0 ? 'FREE' : '₹' + shipping}</span>
+                </div>
+                <div class="order-summary-item">
+                    <span>Tax (5%):</span>
+                    <span>₹${tax.toFixed(2)}</span>
+                </div>
+                <div class="order-summary-item order-total">
+                    <span>Total:</span>
+                    <span>₹${total.toFixed(2)}</span>
+                </div>
+            `;
+            
+            document.getElementById('checkoutSummary').innerHTML = summaryHTML;
+            
+            // Also load order confirmation details
+            const orderDetailsHTML = shoppingCart.map(item => `
+                <div class="order-item">
+                    <span>${item.name} (${item.cartQuantity} ${item.unit})</span>
+                    <span>₹${item.price * item.cartQuantity}</span>
+                </div>
+            `).join('') + summaryHTML;
+            
+            document.getElementById('orderConfirmationDetails').innerHTML = orderDetailsHTML;
+        }
+
+        function placeOrder() {
+            if (!document.getElementById('termsAgree').checked) {
+                alert('Please agree to the Terms & Conditions');
+                return;
+            }
+            
+            // Create order
+            const order = {
+                id: 'ORD' + Date.now(),
+                date: new Date().toISOString(),
+                items: [...shoppingCart],
+                shipping: {
+                    name: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    city: document.getElementById('city').value,
+                    state: document.getElementById('state').value,
+                    pincode: document.getElementById('pincode').value
+                },
+                payment: {
+                    method: document.querySelector('input[name="paymentMethod"]:checked').value,
+                    cardLast4: document.getElementById('cardNumber') ? document.getElementById('cardNumber').value.slice(-4) : 'N/A'
+                },
+                status: 'confirmed',
+                total: shoppingCart.reduce((sum, item) => sum + (item.price * item.cartQuantity), 0)
+            };
+            
+            // Add to orders
+            orders.unshift(order);
+            localStorage.setItem('agronexus_orders', JSON.stringify(orders));
+            
+            // Clear cart
+            shoppingCart = [];
+            saveCartToStorage();
+            updateCartDisplay();
+            
+            // Show success
+            document.getElementById('orderSuccessDetails').innerHTML = `
+                <div><strong>Order ID:</strong> ${order.id}</div>
+                <div><strong>Total Amount:</strong> ₹${order.total}</div>
+                <div><strong>Status:</strong> <span class="order-status status-confirmed">Confirmed</span></div>
+                <div><strong>Estimated Delivery:</strong> ${new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
+            `;
+            
+            document.getElementById('checkoutStep3').style.display = 'none';
+            document.getElementById('orderSuccess').style.display = 'block';
+            
+            // Update steps
+            document.querySelectorAll('.checkout-step').forEach(step => {
+                step.classList.add('step-completed');
+            });
+        }
+
+        function closeCheckoutSuccess() {
+            document.getElementById('checkoutModal').style.display = 'none';
+            resetCheckout();
+            closeCart();
+        }
+
+        function resetCheckout() {
+            currentCheckoutStep = 1;
+            updateCheckoutSteps();
+        }
+
+        // ORDER HISTORY FUNCTIONS
+        function viewOrderHistory() {
+            const orderHistorySection = document.getElementById('orderHistorySection');
+            const productsContainer = document.getElementById('products-container');
+            
+            if (orderHistorySection.style.display === 'none') {
+                orderHistorySection.style.display = 'block';
+                productsContainer.style.display = 'none';
+                document.getElementById('orderHistoryBtn').innerHTML = '← Back to Products';
+                loadOrderHistory();
+            } else {
+                orderHistorySection.style.display = 'none';
+                productsContainer.style.display = 'block';
+                document.getElementById('orderHistoryBtn').innerHTML = 'Order History';
+            }
+        }
+
+        function loadOrderHistory() {
+            const ordersContainer = document.getElementById('ordersContainer');
+            
+            if (orders.length === 0) {
+                ordersContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #666;">
+                        <div style="font-size: 3em; margin-bottom: 20px;">📦</div>
+                        <h3>No orders yet</h3>
+                        <p>Your order history will appear here once you start shopping.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            ordersContainer.innerHTML = orders.map(order => `
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <strong>Order #${order.id}</strong>
+                            <div style="font-size: 0.9em; color: #666;">${new Date(order.date).toLocaleDateString()}</div>
+                        </div>
+                        <div>
+                            <span class="order-status status-${order.status}">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span>
+                            <div style="font-size: 1.1em; font-weight: bold; color: #2e7d32;">₹${order.total}</div>
+                        </div>
+                    </div>
+                    <div class="order-items">
+                        ${order.items.map(item => `
+                            <div class="order-item">
+                                <span>${item.name} (${item.cartQuantity} ${item.unit})</span>
+                                <span>₹${item.price * item.cartQuantity}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                        <strong>Shipping to:</strong> ${order.shipping.name}, ${order.shipping.city}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // UTILITY FUNCTIONS
+        function showMessage(message, type) {
+            // Create a simple alert for now
+            alert(message);
+        }
+
         function logout() {
             if (confirm('Are you sure you want to logout?')) {
                 localStorage.removeItem('agronexus_user');
@@ -1005,55 +2046,50 @@
             }
         }
 
-        // Placeholder functions for marketplace features
+        // ADMIN FUNCTIONS
+        function adminEditProduct(productId) {
+            alert(`Admin: Editing product ${productId}\n\nAdmin can edit any product on the platform.`);
+        }
+
+        function flagProduct(productId) {
+            if (confirm('Flag this product for review?')) {
+                alert(`Product ${productId} has been flagged for admin review.`);
+            }
+        }
+
+        function adminDeleteProduct(productId) {
+            if (confirm('Are you sure you want to remove this product from the platform?')) {
+                alert(`Admin: Product ${productId} removed from platform.`);
+            }
+        }
+
+        function manageUsers() {
+            alert('👥 User Management Panel\n\nView: All registered users\nManage: User permissions\nMonitor: User activity');
+        }
+
+        function viewReports() {
+            alert('📊 Platform Reports\n\nSales Reports\nUser Activity\nProduct Performance\nRevenue Analytics');
+        }
+
+        function moderateProducts() {
+            alert('🛡️ Product Moderation\n\nReview flagged products\nQuality control\nContent moderation');
+        }
+
+        // FARMER FUNCTIONS
         function loadFarmerStats(farmerId) {
             // Demo stats
             document.getElementById('totalSales').textContent = '2,500';
             document.getElementById('averageRating').textContent = '4.5';
         }
 
-        function loadCartData() {
-            // Demo cart data
-            document.getElementById('cartCount').textContent = '0 items';
-            document.getElementById('cartTotal').textContent = '₹0';
-        }
-
-        function loadPlatformStats() {
-            // Demo platform stats
-            console.log('Loading platform stats');
-        }
-
-        function addToCart(productId) {
-            alert(`Product ${productId} added to cart!`);
-            // Implement cart functionality here
-        }
-
         function editProduct(productId) {
             alert(`Edit product ${productId}`);
-            // Implement edit functionality here
         }
 
         function deleteProduct(productId) {
             if (confirm('Are you sure you want to delete this product?')) {
                 alert(`Product ${productId} deleted!`);
-                // Implement delete functionality here
             }
-        }
-
-        function viewCart() {
-            alert('Shopping cart feature coming soon!');
-        }
-
-        function manageUsers() {
-            alert('User management feature coming soon!');
-        }
-
-        function viewReports() {
-            alert('Reports feature coming soon!');
-        }
-
-        function moderateProducts() {
-            alert('Product moderation feature coming soon!');
         }
 
         function openAddProductModal() {
@@ -1067,8 +2103,31 @@
         // Form submission for adding products
         document.getElementById('addProductForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            const newProduct = {
+                id: Date.now().toString(),
+                name: document.getElementById('productName').value,
+                category: document.getElementById('productCategory').value,
+                price: parseFloat(document.getElementById('productPrice').value),
+                quantity: parseFloat(document.getElementById('productQuantity').value),
+                unit: document.getElementById('productUnit').value,
+                description: document.getElementById('productDescription').value,
+                location: document.getElementById('productLocation').value,
+                sellerName: currentUser.name,
+                sellerId: currentUser.id,
+                harvestDate: document.getElementById('productHarvestDate').value || new Date().toISOString().split('T')[0]
+            };
+            
+            // Add to sample products (in real app, this would go to backend)
+            sampleProducts.unshift(newProduct);
+            
             alert('Product added successfully!');
             closeAddProductModal();
+            
+            // Reload farmer's view to show the new product
+            if (currentUser.type === 'farmer') {
+                loadFarmerProducts(currentUser.id);
+            }
         });
 
         // Initialize marketplace when page loads

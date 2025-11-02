@@ -926,18 +926,18 @@
                 } else {
                     // Fallback: redirect based on user type
                     if (selectedAccountType === 'farmer') {
-                        window.location.href = '/marketplace';
+                        window.location.href = 'marketplace.html';
                     } else if (selectedAccountType === 'customer') {
-                        window.location.href = '/marketplace';
+                        window.location.href = 'marketplace.html';
                     } else if (selectedAccountType === 'admin') {
-                        window.location.href = '/admin';
+                        window.location.href = 'marketplace.html';  // ← FIXED: All go to marketplace
                     } else {
-                        window.location.href = '/';
+                        window.location.href = 'home.html';
                     }
                 }
             }, 1500);
+
         }
-        
         // Toggle password visibility
         function togglePasswordVisibility(inputId) {
             const input = document.getElementById(inputId);
