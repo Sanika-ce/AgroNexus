@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
         /* Enhanced Marketplace Styles */
         * {
@@ -68,6 +70,49 @@
             font-size: 2em;
             font-weight: bold;
             color: #fff;
+        }
+
+        /* Payment Status Styles */
+        .payment-status {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .payment-completed {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .payment-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .payment-failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Card Input Styles */
+        .card-input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .card-input-group input {
+            padding-right: 40px;
+        }
+
+        .card-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 1.2em;
         }
         
         /* Dashboard Sections */
@@ -1330,6 +1375,200 @@
             updateCartDisplay();
         }
 
+        // STRIPE PAYMENT FUNCTIONS
+        function initializeStripe() {
+            // Initialize Stripe with test publishable key
+            window.stripe = Stripe('pk_test_51P8g9RRs2Rz5p7pK5p7pK5p7pK5p7pK5p7pK5p7pK5p7pK5p7pK5p7pK5p7pK5p7pK5p7pK5p7pK5p7pK5p7pK5p7pK');
+            console.log('💳 Stripe initialized in test mode');
+        }
+
+        async function processStripePayment() {
+            if (shoppingCart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            // Calculate order total in cents (Stripe requires amount in smallest currency unit)
+            const orderTotal = shoppingCart.reduce((sum, item) => sum + (item.price * item.cartQuantity), 0);
+            const amountInCents = Math.round(orderTotal * 100); // Convert to cents/paisa
+
+            try {
+                // Show loading state
+                document.querySelector('button[onclick="placeOrder()"]').disabled = true;
+                document.querySelector('button[onclick="placeOrder()"]').innerHTML = 'Processing...';
+
+                // In a real application, you would call your backend to create a Payment Intent
+                // For demo purposes, we'll simulate this
+                const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+                
+                if (paymentMethod === 'card') {
+                    await processCardPayment(amountInCents);
+                } else if (paymentMethod === 'upi') {
+                    await processUPIPayment(amountInCents);
+                } else if (paymentMethod === 'cod') {
+                    await processCODOrder();
+                }
+
+            } catch (error) {
+                console.error('Payment failed:', error);
+                alert('Payment failed. Please try again.');
+                document.querySelector('button[onclick="placeOrder()"]').disabled = false;
+                document.querySelector('button[onclick="placeOrder()"]').innerHTML = 'Place Order';
+            }
+        }
+
+        async function processCardPayment(amountInCents) {
+            // Create payment intent (in real app, this would be from your backend)
+            const paymentIntent = {
+                id: 'pi_' + Math.random().toString(36).substr(2, 9),
+                client_secret: 'pi_' + Math.random().toString(36).substr(2, 9) + '_secret_' + Math.random().toString(36).substr(2, 9),
+                amount: amountInCents,
+                currency: 'inr'
+            };
+
+            // For demo, we'll simulate Stripe Elements
+            const result = await stripe.confirmCardPayment(paymentIntent.client_secret, {
+                payment_method: {
+                    card: {
+                        number: document.getElementById('cardNumber').value,
+                        exp_month: document.getElementById('expiry').value.split('/')[0],
+                        exp_year: document.getElementById('expiry').value.split('/')[1],
+                        cvc: document.getElementById('cvv').value,
+                    },
+                    billing_details: {
+                        name: document.getElementById('cardName').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                    },
+                }
+            });
+
+            if (result.error) {
+                throw new Error(result.error.message);
+            } else {
+                // Payment successful
+                completeOrder('card', result.paymentIntent.id);
+            }
+        }
+
+        async function processUPIPayment(amountInCents) {
+            // Simulate UPI payment flow
+            const upiId = prompt('Enter your UPI ID (e.g., yourname@upi):');
+            
+            if (!upiId) {
+                throw new Error('UPI ID is required');
+            }
+
+            // Simulate UPI payment processing
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Simulate successful UPI payment
+            const success = Math.random() > 0.1; // 90% success rate for demo
+            
+            if (success) {
+                completeOrder('upi', 'upi_' + Math.random().toString(36).substr(2, 9));
+            } else {
+                throw new Error('UPI payment failed. Please try again.');
+            }
+        }
+
+        async function processCODOrder() {
+            // For Cash on Delivery, just complete the order
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate processing
+            completeOrder('cod', 'cod_' + Date.now());
+        }
+
+        function completeOrder(paymentMethod, transactionId) {
+            // Create order
+            const order = {
+                id: 'ORD' + Date.now(),
+                date: new Date().toISOString(),
+                items: [...shoppingCart],
+                shipping: {
+                    name: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    city: document.getElementById('city').value,
+                    state: document.getElementById('state').value,
+                    pincode: document.getElementById('pincode').value
+                },
+                payment: {
+                    method: paymentMethod,
+                    transactionId: transactionId,
+                    status: paymentMethod === 'cod' ? 'pending' : 'completed',
+                    amount: shoppingCart.reduce((sum, item) => sum + (item.price * item.cartQuantity), 0)
+                },
+                status: 'confirmed',
+                total: shoppingCart.reduce((sum, item) => sum + (item.price * item.cartQuantity), 0)
+            };
+
+            // Add to orders
+            orders.unshift(order);
+            localStorage.setItem('agronexus_orders', JSON.stringify(orders));
+
+            // Clear cart
+            shoppingCart = [];
+            saveCartToStorage();
+            updateCartDisplay();
+
+            // Show success
+            document.getElementById('orderSuccessDetails').innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 3em; color: #4caf50; margin-bottom: 20px;">✅</div>
+                    <h3 style="color: #2e7d32; margin-bottom: 10px;">Payment Successful!</h3>
+                    <div><strong>Order ID:</strong> ${order.id}</div>
+                    <div><strong>Total Amount:</strong> ₹${order.total}</div>
+                    <div><strong>Payment Method:</strong> ${getPaymentMethodName(paymentMethod)}</div>
+                    <div><strong>Transaction ID:</strong> ${transactionId}</div>
+                    <div><strong>Status:</strong> <span class="order-status status-confirmed">Confirmed</span></div>
+                    <div><strong>Estimated Delivery:</strong> ${new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
+                    ${paymentMethod === 'cod' ? '<div style="color: #ff9800; margin-top: 10px; font-weight: 600;">💵 Payment due on delivery</div>' : ''}
+                </div>
+            `;
+
+            document.getElementById('checkoutStep3').style.display = 'none';
+            document.getElementById('orderSuccess').style.display = 'block';
+
+            // Update steps
+            document.querySelectorAll('.checkout-step').forEach(step => {
+                step.classList.add('step-completed');
+            });
+        }
+
+        function getPaymentMethodName(method) {
+            const methods = {
+                'card': 'Credit/Debit Card',
+                'upi': 'UPI Payment',
+                'cod': 'Cash on Delivery'
+            };
+            return methods[method] || method;
+        }
+
+                // Handle payment method changes
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+            paymentMethods.forEach(method => {
+                method.addEventListener('change', function() {
+                    updatePaymentFormVisibility();
+                });
+            });
+            
+            // Initialize Stripe
+            initializeStripe();
+        });
+
+        function updatePaymentFormVisibility() {
+            const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const cardDetails = document.getElementById('cardDetails');
+            
+            if (selectedMethod === 'card') {
+                cardDetails.style.display = 'block';
+            } else {
+                cardDetails.style.display = 'none';
+            }
+        }
+
         // NAVIGATION AND ROLE FUNCTIONS
         function updateNavigationForRole(user) {
             const navAuth = document.getElementById('navAuth');
@@ -1915,53 +2154,47 @@
                 alert('Please agree to the Terms & Conditions');
                 return;
             }
+
+            // Validate card details if card payment is selected
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
             
-            // Create order
-            const order = {
-                id: 'ORD' + Date.now(),
-                date: new Date().toISOString(),
-                items: [...shoppingCart],
-                shipping: {
-                    name: document.getElementById('fullName').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    address: document.getElementById('address').value,
-                    city: document.getElementById('city').value,
-                    state: document.getElementById('state').value,
-                    pincode: document.getElementById('pincode').value
-                },
-                payment: {
-                    method: document.querySelector('input[name="paymentMethod"]:checked').value,
-                    cardLast4: document.getElementById('cardNumber') ? document.getElementById('cardNumber').value.slice(-4) : 'N/A'
-                },
-                status: 'confirmed',
-                total: shoppingCart.reduce((sum, item) => sum + (item.price * item.cartQuantity), 0)
-            };
-            
-            // Add to orders
-            orders.unshift(order);
-            localStorage.setItem('agronexus_orders', JSON.stringify(orders));
-            
-            // Clear cart
-            shoppingCart = [];
-            saveCartToStorage();
-            updateCartDisplay();
-            
-            // Show success
-            document.getElementById('orderSuccessDetails').innerHTML = `
-                <div><strong>Order ID:</strong> ${order.id}</div>
-                <div><strong>Total Amount:</strong> ₹${order.total}</div>
-                <div><strong>Status:</strong> <span class="order-status status-confirmed">Confirmed</span></div>
-                <div><strong>Estimated Delivery:</strong> ${new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
-            `;
-            
-            document.getElementById('checkoutStep3').style.display = 'none';
-            document.getElementById('orderSuccess').style.display = 'block';
-            
-            // Update steps
-            document.querySelectorAll('.checkout-step').forEach(step => {
-                step.classList.add('step-completed');
-            });
+            if (paymentMethod === 'card') {
+                if (!validateCardDetails()) {
+                    return;
+                }
+            }
+
+            // Process payment
+            processStripePayment();
+        }
+
+        function validateCardDetails() {
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiry = document.getElementById('expiry').value;
+            const cvv = document.getElementById('cvv').value;
+            const cardName = document.getElementById('cardName').value;
+
+            if (!cardNumber || cardNumber.replace(/\s/g, '').length !== 16) {
+                alert('Please enter a valid 16-digit card number');
+                return false;
+            }
+
+            if (!expiry || !expiry.includes('/')) {
+                alert('Please enter a valid expiry date (MM/YY)');
+                return false;
+            }
+
+            if (!cvv || cvv.length !== 3) {
+                alert('Please enter a valid 3-digit CVV');
+                return false;
+            }
+
+            if (!cardName) {
+                alert('Please enter the name on card');
+                return false;
+            }
+
+            return true;
         }
 
         function closeCheckoutSuccess() {
