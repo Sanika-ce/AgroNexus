@@ -15,7 +15,8 @@ const sampleProducts = [
         unit: 'kg',
         description: 'Fresh organic tomatoes from our farm, grown without pesticides.',
         location: 'Nashik, Maharashtra',
-        harvest_date: '2024-01-20'
+        harvest_date: '2024-01-20',
+        image: 'image/tomato.jpeg'
     },
     {
         farmer_id: 2,
@@ -26,7 +27,9 @@ const sampleProducts = [
         unit: 'kg',
         description: 'Premium quality basmati rice, freshly harvested.',
         location: 'Punjab',
-        harvest_date: '2024-01-15'
+        harvest_date: '2024-01-15',
+        image: 'image/rice.jpeg'
+
     },
     {
         farmer_id: 1,
@@ -37,7 +40,8 @@ const sampleProducts = [
         unit: 'kg',
         description: 'Sweet and juicy alphonso mangoes, perfect for exports.',
         location: 'Ratnagiri, Maharashtra',
-        harvest_date: '2024-02-01'
+        harvest_date: '2024-02-01',
+        image: 'image/mango.jpg'
     }
 ];
 
